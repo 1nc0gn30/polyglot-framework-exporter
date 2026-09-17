@@ -163,14 +163,14 @@ FALLBACK_EMBEDDED_HTML = """<!DOCTYPE html>
 
 def find_public_directory() -> Optional[Path]:
     """Locate the public/ directory containing web assets."""
-    cwd_public = Path.cwd() / "public"
-    if cwd_public.is_dir() and (cwd_public / "index.html").is_file():
-        return cwd_public
-
     pkg_dir = Path(__file__).resolve().parent
     repo_public = pkg_dir.parent.parent / "public"
     if repo_public.is_dir() and (repo_public / "index.html").is_file():
         return repo_public
+
+    cwd_public = Path.cwd() / "public"
+    if cwd_public.is_dir() and (cwd_public / "index.html").is_file():
+        return cwd_public
 
     internal_public = pkg_dir / "public"
     if internal_public.is_dir() and (internal_public / "index.html").is_file():
