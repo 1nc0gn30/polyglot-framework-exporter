@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="material-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Framework Studio • Polyglot Exporter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================================
+       CSS Theme Variables & Material 3 Design Tokens
+       ========================================================================= */
+    :root, [data-theme="material-light"] {
+      --md-sys-color-primary: #1a73e8;
+      --md-sys-color-on-primary: #ffffff;
+      --md-sys-color-primary-container: #e8f0fe;
+      --md-sys-color-on-primary-container: #174ea6;
+      --md-sys-color-secondary: #5f6368;
+      --md-sys-color-on-secondary: #ffffff;
+      --md-sys-color-secondary-container: #f1f3f4;
+      --md-sys-color-on-secondary-container: #202124;
+      --md-sys-color-surface: #f8f9fa;
+      --md-sys-color-surface-container-low: #f1f3f4;
+      --md-sys-color-surface-container: #ffffff;
+      --md-sys-color-surface-container-high: #ffffff;
+      --md-sys-color-surface-container-highest: #e8eaed;
+      --md-sys-color-on-surface: #202124;
+      --md-sys-color-on-surface-variant: #5f6368;
+      --md-sys-color-outline: #dadce0;
+      --md-sys-color-outline-variant: #e8eaed;
+      --md-sys-color-success: #1e8e3e;
+      --md-sys-color-success-container: #e6f4ea;
+      --md-sys-color-warning: #f9ab00;
+      --md-sys-color-error: #d93025;
+      --md-sys-color-error-container: #fce8e6;
+      --code-bg: #f8f9fa;
+      --code-border: #dadce0;
+      --code-text: #202124;
+      --shadow-sm: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+      --shadow-md: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+      --shadow-lg: 0 2px 6px 2px rgba(60,64,67,0.15), 0 8px 24px 4px rgba(60,64,67,0.12);
+      --font-brand: 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Roboto Mono', 'SF Mono', Consolas, Menlo, monospace;
+    }
+
+    [data-theme="material-dark"] {
+      --md-sys-color-primary: #8ab4f8;
+      --md-sys-color-on-primary: #041e49;
+      --md-sys-color-primary-container: #0842a0;
+      --md-sys-color-on-primary-container: #d3e3fd;
+      --md-sys-color-secondary: #9aa0a6;
+      --md-sys-color-on-secondary: #202124;
+      --md-sys-color-secondary-container: #303134;
+      --md-sys-color-on-secondary-container: #e8eaed;
+      --md-sys-color-surface: #121212;
+      --md-sys-color-surface-container-low: #1e1e1e;
+      --md-sys-color-surface-container: #242424;
+      --md-sys-color-surface-container-high: #2d2d2d;
+      --md-sys-color-surface-container-highest: #383838;
+      --md-sys-color-on-surface: #e8eaed;
+      --md-sys-color-on-surface-variant: #9aa0a6;
+      --md-sys-color-outline: #5f6368;
+      --md-sys-color-outline-variant: #3c4043;
+      --md-sys-color-success: #81c995;
+      --md-sys-color-success-container: #0d381e;
+      --md-sys-color-warning: #fdd663;
+      --md-sys-color-error: #f28b82;
+      --md-sys-color-error-container: #49120e;
+      --code-bg: #1a1a1a;
+      --code-border: #3c4043;
+      --code-text: #e8eaed;
+      --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.5);
+      --shadow-md: 0 4px 12px 0 rgba(0,0,0,0.5);
+      --shadow-lg: 0 8px 24px 0 rgba(0,0,0,0.6);
+    }
+
+    [data-theme="obsidian-gold"] {
+      --md-sys-color-primary: #ffd700;
+      --md-sys-color-on-primary: #1a1500;
+      --md-sys-color-primary-container: #4d3f00;
+      --md-sys-color-on-primary-container: #fff1a8;
+      --md-sys-color-secondary: #d4af37;
+      --md-sys-color-on-secondary: #1a1500;
+      --md-sys-color-secondary-container: #26210f;
+      --md-sys-color-on-secondary-container: #fff5c0;
+      --md-sys-color-surface: #0a0a0a;
+      --md-sys-color-surface-container-low: #121212;
+      --md-sys-color-surface-container: #181818;
+      --md-sys-color-surface-container-high: #222222;
+      --md-sys-color-surface-container-highest: #2e2e2e;
+      --md-sys-color-on-surface: #f5f5f5;
+      --md-sys-color-on-surface-variant: #c0b283;
+      --md-sys-color-outline: #4d442b;
+      --md-sys-color-outline-variant: #332d1d;
+      --md-sys-color-success: #55efc4;
+      --md-sys-color-success-container: #003829;
+      --md-sys-color-warning: #ffeaa7;
+      --md-sys-color-error: #ff7675;
+      --md-sys-color-error-container: #4d1515;
+      --code-bg: #0f0f0f;
+      --code-border: #4d442b;
+      --code-text: #f5f5f5;
+      --shadow-sm: 0 1px 3px rgba(255, 215, 0, 0.1);
+      --shadow-md: 0 4px 14px rgba(255, 215, 0, 0.15);
+      --shadow-lg: 0 8px 30px rgba(255, 215, 0, 0.2);
+    }
+
+    [data-theme="midnight-neon"] {
+      --md-sys-color-primary: #00f0ff;
+      --md-sys-color-on-primary: #002b30;
+      --md-sys-color-primary-container: #004d57;
+      --md-sys-color-on-primary-container: #99f9ff;
+      --md-sys-color-secondary: #ff007f;
+      --md-sys-color-on-secondary: #3d001b;
+      --md-sys-color-secondary-container: #3d0023;
+      --md-sys-color-on-secondary-container: #ffb3d9;
+      --md-sys-color-surface: #070913;
+      --md-sys-color-surface-container-low: #0c0e1e;
+      --md-sys-color-surface-container: #121528;
+      --md-sys-color-surface-container-high: #1a1e38;
+      --md-sys-color-surface-container-highest: #23294c;
+      --md-sys-color-on-surface: #e6ebff;
+      --md-sys-color-on-surface-variant: #9da8d6;
+      --md-sys-color-outline: #384277;
+      --md-sys-color-outline-variant: #252c50;
+      --md-sys-color-success: #00ffa3;
+      --md-sys-color-success-container: #003d27;
+      --md-sys-color-warning: #ffea00;
+      --md-sys-color-error: #ff3366;
+      --md-sys-color-error-container: #470014;
+      --code-bg: #0b0d1b;
+      --code-border: #384277;
+      --code-text: #e6ebff;
+      --shadow-sm: 0 0 10px rgba(0, 240, 255, 0.15);
+      --shadow-md: 0 0 20px rgba(0, 240, 255, 0.25);
+      --shadow-lg: 0 0 35px rgba(0, 240, 255, 0.35);
+    }
+
+    [data-theme="acid-grid"] {
+      --md-sys-color-primary: #76ff03;
+      --md-sys-color-on-primary: #122b00;
+      --md-sys-color-primary-container: #265500;
+      --md-sys-color-on-primary-container: #baff7a;
+      --md-sys-color-secondary: #00e5ff;
+      --md-sys-color-on-secondary: #002f36;
+      --md-sys-color-secondary-container: #00454f;
+      --md-sys-color-on-secondary-container: #80f2ff;
+      --md-sys-color-surface: #0a0e08;
+      --md-sys-color-surface-container-low: #10160d;
+      --md-sys-color-surface-container: #162012;
+      --md-sys-color-surface-container-high: #1d2b18;
+      --md-sys-color-surface-container-highest: #263820;
+      --md-sys-color-on-surface: #f0f7ee;
+      --md-sys-color-on-surface-variant: #a4bfa0;
+      --md-sys-color-outline: #41593c;
+      --md-sys-color-outline-variant: #2b3b28;
+      --md-sys-color-success: #76ff03;
+      --md-sys-color-success-container: #1a4000;
+      --md-sys-color-warning: #ffd600;
+      --md-sys-color-error: #ff1744;
+      --md-sys-color-error-container: #4a000e;
+      --code-bg: #0d140a;
+      --code-border: #41593c;
+      --code-text: #f0f7ee;
+      --shadow-sm: 0 0 8px rgba(118, 255, 3, 0.2);
+      --shadow-md: 0 0 18px rgba(118, 255, 3, 0.25);
+      --shadow-lg: 0 0 30px rgba(118, 255, 3, 0.35);
+    }
+
+    /* =========================================================================
+       Base Reset & Global Styles
+       ========================================================================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      font-size: 14px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* =========================================================================
+       App Bar & Header
+       ========================================================================= */
+    .top-bar-accent {
+      height: 4px;
+      background: linear-gradient(90deg, #4285f4 0%, #ea4335 25%, #fbbc05 50%, #34a853 75%, #4285f4 100%);
+      width: 100%;
+    }
+
+    .app-bar {
+      background-color: var(--md-sys-color-surface-container);
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-primary);
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .brand-title {
+      font-family: var(--font-brand);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--md-sys-color-on-surface);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--md-sys-color-on-surface-variant);
+      font-weight: 400;
+      margin-left: 2px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-weight: 500;
+      background-color: var(--md-sys-color-success-container);
+      color: var(--md-sys-color-success);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: currentColor;
+      animation: pulse-dot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* =========================================================================
+       Buttons & Inputs
+       ========================================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: var(--font-brand);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary:active {
+      filter: brightness(0.95);
+    }
+
+    .btn-secondary {
+      background-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+      border-color: var(--md-sys-color-outline-variant);
+    }
+    .btn-secondary:hover {
+      background-color: var(--md-sys-color-surface-container-highest);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--md-sys-color-on-surface);
+      border-color: var(--md-sys-color-outline);
+    }
+    .btn-outline:hover {
+      background-color: var(--md-sys-color-surface-container-low);
+      border-color: var(--md-sys-color-primary);
+      color: var(--md-sys-color-primary);
+    }
+
+    .btn-icon {
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--md-sys-color-outline-variant);
+      background: var(--md-sys-color-surface-container);
+      color: var(--md-sys-color-on-surface);
+      cursor: pointer;
+    }
+    .btn-icon:hover {
+      background: var(--md-sys-color-surface-container-highest);
+    }
+
+    .theme-select {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--md-sys-color-outline);
+      background-color: var(--md-sys-color-surface-container);
+      color: var(--md-sys-color-on-surface);
+      cursor: pointer;
+      outline: none;
+    }
+    .theme-select:focus {
+      border-color: var(--md-sys-color-primary);
+    }
+
+    /* =========================================================================
+       Main Layout
+       ========================================================================= */
+    .studio-container {
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: var(--md-sys-color-surface-container);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #1a73e8, #34a853, #fbbc05, #ea4335);
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-brand);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--md-sys-color-on-surface);
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-text p {
+      font-size: 0.9rem;
+      color: var(--md-sys-color-on-surface-variant);
+      max-width: 800px;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Tabs Navigation */
+    .tab-bar {
+      display: flex;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+      gap: 0.5rem;
+    }
+
+    .tab-button {
+      font-family: var(--font-brand);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.75rem 1.25rem;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--md-sys-color-on-surface-variant);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .tab-button:hover {
+      color: var(--md-sys-color-on-surface);
+    }
+    .tab-button.active {
+      color: var(--md-sys-color-primary);
+      border-bottom-color: var(--md-sys-color-primary);
+    }
+
+    /* Grid Views */
+    .view-content {
+      display: none;
+    }
+    .view-content.active {
+      display: block;
+    }
+
+    /* =========================================================================
+       Framework Selection Grid
+       ========================================================================= */
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .framework-card {
+      background: var(--md-sys-color-surface-container);
+      border: 2px solid var(--md-sys-color-outline-variant);
+      border-radius: 14px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .framework-card:hover {
+      border-color: var(--md-sys-color-primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .framework-card.selected {
+      border-color: var(--md-sys-color-primary);
+      background: var(--md-sys-color-surface-container-high);
+      box-shadow: 0 0 0 1px var(--md-sys-color-primary), var(--shadow-sm);
+    }
+
+    .framework-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .framework-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      background: var(--md-sys-color-surface-container-highest);
+    }
+
+    .framework-title {
+      font-family: var(--font-brand);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    .framework-tagline {
+      font-size: 0.8rem;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-top: 2px;
+    }
+
+    .framework-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--md-sys-color-outline);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    .framework-card.selected .framework-check {
+      background: var(--md-sys-color-primary);
+      border-color: var(--md-sys-color-primary);
+    }
+
+    .framework-desc {
+      font-size: 0.85rem;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .framework-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--md-sys-color-outline-variant);
+      padding-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    .framework-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+    }
+
+    /* =========================================================================
+       Studio Workspace (Config + File Explorer + Code Viewer)
+       ========================================================================= */
+    .studio-workspace {
+      display: grid;
+      grid-template-columns: 320px 280px 1fr;
+      gap: 1.25rem;
+      min-height: 600px;
+    }
+
+    @media (max-width: 1200px) {
+      .studio-workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--md-sys-color-surface-container);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .panel-header {
+      padding: 0.75rem 1rem;
+      background: var(--md-sys-color-surface-container-high);
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-title {
+      font-family: var(--font-brand);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--md-sys-color-on-surface);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-body {
+      padding: 1rem;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--md-sys-color-outline);
+      background: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--md-sys-color-primary);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--md-sys-color-on-surface);
+      cursor: pointer;
+    }
+
+    /* File Tree Explorer */
+    .file-tree-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .file-tree-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--md-sys-color-on-surface);
+      cursor: pointer;
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .file-tree-item:hover {
+      background: var(--md-sys-color-surface-container-highest);
+    }
+    .file-tree-item.active {
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      font-weight: 500;
+    }
+
+    .file-icon {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* Code Viewer Panel */
+    .code-viewer-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--code-bg);
+    }
+
+    .code-viewer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      background: var(--md-sys-color-surface-container-high);
+      border-bottom: 1px solid var(--code-border);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .code-content {
+      padding: 1rem;
+      flex: 1;
+      overflow: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--code-text);
+      line-height: 1.6;
+      white-space: pre-wrap;
+      tab-size: 2;
+    }
+
+    /* Transpiler Sandbox */
+    .transpiler-sandbox {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      height: 600px;
+    }
+    @media (max-width: 900px) {
+      .transpiler-sandbox {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+    }
+
+    /* Notification Toast */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--md-sys-color-on-surface);
+      color: var(--md-sys-color-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      box-shadow: var(--shadow-lg);
+      display: none;
+      align-items: center;
+      gap: 8px;
+      z-index: 1000;
+    }
+    .toast.show {
+      display: flex;
+      animation: slide-up 0.3s ease-out;
+    }
+    @keyframes slide-up {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Footer */
+    .app-footer {
+      border-top: 1px solid var(--md-sys-color-outline-variant);
+      padding: 1rem 1.5rem;
+      background: var(--md-sys-color-surface-container);
+      font-size: 0.75rem;
+      color: var(--md-sys-color-on-surface-variant);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar-accent"></div>
+
+  <!-- App Header -->
+  <header class="app-bar">
+    <div class="brand-section">
+      <div class="brand-logo">P</div>
+      <div>
+        <div class="brand-title">
+          Google Framework Studio
+          <span class="status-badge" id="server-status">
+            <span class="status-dot"></span>
+            <span id="status-text">Connecting...</span>
+          </span>
+        </div>
+        <div class="brand-subtitle">Polyglot Multi-Framework Exporter & Transpiler • Zero External Dependencies</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <select id="theme-selector" class="theme-select" onchange="changeTheme(this.value)">
+        <option value="material-light">Material 3 Light (Google)</option>
+        <option value="material-dark">Material Dark</option>
+        <option value="obsidian-gold">Obsidian Gold</option>
+        <option value="midnight-neon">Midnight Neon</option>
+        <option value="acid-grid">Acid Grid</option>
+      </select>
+
+      <button class="btn btn-outline" onclick="openMcpModal()">
+        <span>⚡ MCP Config</span>
+      </button>
+
+      <button class="btn btn-primary" id="btn-download-zip" onclick="triggerZipDownload()">
+        <span>📦 1-Click ZIP</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="studio-container">
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <div class="hero-text">
+        <h1>Export Any App to 9 Modern Web & Desktop Frameworks</h1>
+        <p>Pure Python stdlib engine for scaffolding production-ready Astro 5, Next.js 15, Vite React, SvelteKit, Nuxt 3, Deno Fresh, Remix, Tauri v2, and Electron projects with 1-click in-memory ZIP streaming and AST component transpilation.</p>
+        <div class="hero-chips">
+          <span class="chip">🚀 Astro 5 Islands</span>
+          <span class="chip">▲ Next.js 15 App Router</span>
+          <span class="chip">⚛️ Vite React 19</span>
+          <span class="chip">⚡ SvelteKit 2 Runes</span>
+          <span class="chip">💚 Nuxt 3 Composition</span>
+          <span class="chip">🍋 Deno Fresh 2</span>
+          <span class="chip">💿 Remix / RRv7</span>
+          <span class="chip">🦀 Tauri v2</span>
+          <span class="chip">⚡ Electron Desktop</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <div class="tab-bar">
+      <button class="tab-button active" onclick="switchTab('export')">
+        <span>🚀 Framework Exporter</span>
+      </button>
+      <button class="tab-button" onclick="switchTab('transpiler')">
+        <span>🔄 Component Transpiler</span>
+      </button>
+      <button class="tab-button" onclick="switchTab('diagnostics')">
+        <span>📊 Diagnostics & System</span>
+      </button>
+    </div>
+
+    <!-- VIEW 1: Framework Exporter & Studio Workspace -->
+    <div id="view-export" class="view-content active">
+      <!-- Framework Selector Cards -->
+      <div class="framework-grid" id="frameworks-container">
+        <!-- Dynamically generated framework cards -->
+      </div>
+
+      <!-- Studio 3-Column Workspace -->
+      <div class="studio-workspace">
+        <!-- Col 1: Project Settings -->
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">⚙️ Project Configuration</span>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="form-label" for="input-project-name">Project Name</label>
+              <input type="text" id="input-project-name" class="form-input" value="polyglot-app" placeholder="my-app" oninput="updateExport()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="input-app-title">Application Title</label>
+              <input type="text" id="input-app-title" class="form-input" value="Polyglot Framework App" placeholder="App Title" oninput="updateExport()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="input-app-desc">Description</label>
+              <textarea id="input-app-desc" class="form-textarea" rows="2" placeholder="App Description" oninput="updateExport()">Modern multi-framework application scaffolded with Polyglot Framework Exporter.</textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="select-project-theme">UI Theme Preset</label>
+              <select id="select-project-theme" class="form-select" onchange="updateExport()">
+                <option value="material_light">Material 3 Light (Google Blue)</option>
+                <option value="material_dark">Material Dark</option>
+                <option value="obsidian_gold">Obsidian Gold</option>
+                <option value="midnight_neon">Midnight Neon</option>
+                <option value="acid_grid">Acid Grid</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Bundled Features</label>
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="feat-tailwind" checked onchange="updateExport()">
+                  <span>Tailwind CSS Utility Styling</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="feat-typescript" checked onchange="updateExport()">
+                  <span>TypeScript Strict Config</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="feat-pwa" checked onchange="updateExport()">
+                  <span>PWA Manifest & Service Worker</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="feat-mcp" checked onchange="updateExport()">
+                  <span>MCP AI Tooling Config</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="feat-ci" checked onchange="updateExport()">
+                  <span>GitHub Actions CI Matrix</span>
+                </label>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;" onclick="triggerZipDownload()">
+              <span>📦 Download Generated ZIP</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Col 2: File Tree Explorer -->
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">📁 File Tree (<span id="file-count">0</span> files)</span>
+            <span class="tag" id="bundle-size-tag">0 KB</span>
+          </div>
+          <div class="panel-body" style="padding: 0.5rem;">
+            <ul class="file-tree-list" id="file-tree-container">
+              <!-- Files inserted via JS -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Col 3: Live Code Viewer -->
+        <div class="panel" style="flex: 1;">
+          <div class="code-viewer-container">
+            <div class="code-viewer-bar">
+              <span id="active-file-name">package.json</span>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <span class="tag" id="active-file-lines">0 lines</span>
+                <button class="btn btn-outline" style="padding: 2px 8px; font-size: 0.75rem;" onclick="copyActiveFile()">
+                  <span>📋 Copy</span>
+                </button>
+              </div>
+            </div>
+            <pre class="code-content" id="code-display">// Select a file from the file tree to inspect...</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: Component Transpiler -->
+    <div id="view-transpiler" class="view-content">
+      <div class="panel" style="margin-bottom: 1rem;">
+        <div class="panel-header">
+          <span class="panel-title">🔄 Cross-Framework Component AST Transpiler</span>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-secondary" onclick="loadSampleSnippet('counter')">Counter State</button>
+            <button class="btn btn-secondary" onclick="loadSampleSnippet('hero')">Hero Section</button>
+            <button class="btn btn-secondary" onclick="loadSampleSnippet('card')">Card Grid</button>
+          </div>
+        </div>
+        <div class="panel-body" style="padding: 1rem;">
+          <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+            <div>
+              <label class="form-label">Source Framework</label>
+              <select id="transpile-source" class="form-select">
+                <option value="react">React (JSX / TSX)</option>
+                <option value="vue">Vue 3 (SFC)</option>
+                <option value="svelte">Svelte 5 (Runes)</option>
+                <option value="astro">Astro</option>
+              </select>
+            </div>
+            <div style="font-size: 1.5rem; padding-top: 1rem;">➔</div>
+            <div>
+              <label class="form-label">Target Framework</label>
+              <select id="transpile-target" class="form-select">
+                <option value="astro">Astro 5</option>
+                <option value="svelte">SvelteKit 2 (Svelte 5)</option>
+                <option value="vue">Nuxt 3 (Vue 3)</option>
+                <option value="react">Vite React 19</option>
+                <option value="fresh">Deno Fresh 2</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 1.25rem;" onclick="runTranspiler()">
+              <span>⚡ Convert Component</span>
+            </button>
+          </div>
+
+          <div class="transpiler-sandbox">
+            <div class="panel" style="height: 100%;">
+              <div class="panel-header">
+                <span class="panel-title">Source Component Code</span>
+              </div>
+              <textarea id="transpile-input" class="code-content form-textarea" style="height: calc(100% - 40px); resize: none; border: none; font-family: var(--font-mono);"></textarea>
+            </div>
+            <div class="panel" style="height: 100%;">
+              <div class="panel-header">
+                <span class="panel-title">Transpiled Target Output</span>
+                <button class="btn btn-outline" style="padding: 2px 8px; font-size: 0.75rem;" onclick="copyTranspileOutput()">📋 Copy</button>
+              </div>
+              <pre class="code-content" id="transpile-output" style="height: calc(100% - 40px); overflow: auto;">// Click Convert Component to view transpiled output</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: System Diagnostics -->
+    <div id="view-diagnostics" class="view-content">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">📊 System Health & Runtime Diagnostics</span>
+          <button class="btn btn-outline" onclick="fetchDiagnostics()">🔄 Refresh</button>
+        </div>
+        <div class="panel-body">
+          <pre class="code-content" id="diagnostics-json" style="background: var(--code-bg); border-radius: 8px; padding: 1rem;">Loading diagnostics...</pre>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast-msg">Notification message</div>
+
+  <footer class="app-footer">
+    <div>Google Framework Studio &bull; Polyglot Multi-Framework Exporter v0.1.0</div>
+    <div>Zero Dependencies &bull; Pure Python 3.9+ &bull; ThreadingHTTPServer</div>
+  </footer>
+
+  <script>
+    /* =========================================================================
+       State & Framework Definitions
+       ========================================================================= */
+    const FRAMEWORKS = [
+      {
+        id: "astro",
+        name: "Astro 5",
+        tagline: "Island Architecture & Zero-JS SSG",
+        icon: "🚀",
+        color: "#ff5d01",
+        tags: ["Islands", "Content", "SSR/SSG", "Tailwind"],
+        desc: "Next-gen web framework designed for content-rich websites with optional island hydration.",
+        defaultPort: 4321
+      },
+      {
+        id: "nextjs",
+        name: "Next.js 15",
+        tagline: "React Server Components & App Router",
+        icon: "▲",
+        color: "#000000",
+        tags: ["App Router", "Turbopack", "Server Actions"],
+        desc: "Enterprise React framework with hybrid static & server rendering and TypeScript support.",
+        defaultPort: 3000
+      },
+      {
+        id: "vite_react",
+        name: "Vite React 19",
+        tagline: "Ultra-Fast Modern SPA Bundle",
+        icon: "⚛️",
+        color: "#61dafb",
+        tags: ["Vite 6", "React 19", "HMR", "Tailwind"],
+        desc: "Blazing fast Vite-powered Single Page Application with React 19 and modern styling.",
+        defaultPort: 5173
+      },
+      {
+        id: "sveltekit",
+        name: "SvelteKit 2",
+        tagline: "Compiler-Driven Runes Reactivity",
+        icon: "⚡",
+        color: "#ff3e00",
+        tags: ["Svelte 5", "Runes", "Edge-Ready"],
+        desc: "Ultra-compact web framework with fine-grained reactivity and minimal JS bundle sizes.",
+        defaultPort: 5173
+      },
+      {
+        id: "nuxt",
+        name: "Nuxt 3",
+        tagline: "Intuitive Vue 3 & Nitro Universal SSR",
+        icon: "💚",
+        color: "#00dc82",
+        tags: ["Vue 3", "Nitro", "Auto-Imports"],
+        desc: "Full-stack Vue framework featuring file-based routing and universal rendering.",
+        defaultPort: 3000
+      },
+      {
+        id: "deno_fresh",
+        name: "Deno Fresh 2",
+        tagline: "Zero-Build JIT Islands & Edge Native",
+        icon: "🍋",
+        color: "#ffd600",
+        tags: ["Deno", "TypeScript", "Edge Native"],
+        desc: "Next-generation web framework for Deno with zero build step and instant cold starts.",
+        defaultPort: 8000
+      },
+      {
+        id: "remix",
+        name: "Remix / RRv7",
+        tagline: "Web Standards & Nested Loaders",
+        icon: "💿",
+        color: "#e11d48",
+        tags: ["React Router v7", "Loaders", "Optimistic UI"],
+        desc: "Resilient web framework focused on web standards, fast page loads, and smooth transitions.",
+        defaultPort: 3000
+      },
+      {
+        id: "tauri",
+        name: "Tauri v2",
+        tagline: "Tiny Native Desktop Binary with Rust",
+        icon: "🦀",
+        color: "#24c8db",
+        tags: ["Desktop", "Rust", "Vite React", "Native"],
+        desc: "Build ultra-lightweight, secure cross-platform desktop applications using web frontends.",
+        defaultPort: "Desktop"
+      },
+      {
+        id: "electron",
+        name: "Electron 30+",
+        tagline: "Chromium + Node.js Cross-Platform",
+        icon: "⚡",
+        color: "#47848f",
+        tags: ["Desktop", "Node IPC", "Multi-Window"],
+        desc: "Mature desktop app shell combining Chromium rendering with full Node.js API capabilities.",
+        defaultPort: "Desktop"
+      }
+    ];
+
+    let selectedFramework = "astro";
+    let currentGeneratedFiles = {};
+    let activeFilePath = "";
+
+    /* =========================================================================
+       Initialization & UI Rendering
+       ========================================================================= */
+    document.addEventListener("DOMContentLoaded", () => {
+      renderFrameworkGrid();
+      checkServerHealth();
+      loadSampleSnippet("counter");
+      updateExport();
+    });
+
+    function changeTheme(themeName) {
+      document.documentElement.setAttribute("data-theme", themeName);
+      showToast(`Theme switched to ${themeName}`);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".view-content").forEach(v => v.classList.remove("active"));
+
+      const targetBtn = Array.from(document.querySelectorAll(".tab-button")).find(b => b.getAttribute("onclick").includes(tabId));
+      if (targetBtn) targetBtn.classList.add("active");
+
+      const targetView = document.getElementById(`view-${tabId}`);
+      if (targetView) targetView.classList.add("active");
+
+      if (tabId === "diagnostics") {
+        fetchDiagnostics();
+      }
+    }
+
+    function renderFrameworkGrid() {
+      const container = document.getElementById("frameworks-container");
+      container.innerHTML = "";
+
+      FRAMEWORKS.forEach(fw => {
+        const isSelected = fw.id === selectedFramework;
+        const card = document.createElement("div");
+        card.className = `framework-card ${isSelected ? "selected" : ""}`;
+        card.id = `card-${fw.id}`;
+        card.onclick = () => selectFramework(fw.id);
+
+        card.innerHTML = `
+          <div>
+            <div class="framework-header">
+              <div class="framework-icon-wrap" style="color: ${fw.color}">${fw.icon}</div>
+              <div class="framework-check">${isSelected ? "✓" : ""}</div>
+            </div>
+            <div class="framework-title">${fw.name}</div>
+            <div class="framework-tagline">${fw.tagline}</div>
+            <p class="framework-desc">${fw.desc}</p>
+            <div class="framework-tags">
+              ${fw.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+            </div>
+          </div>
+          <div class="framework-meta-row">
+            <span>Port: <strong>${fw.defaultPort}</strong></span>
+            <span>Zero Config</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function selectFramework(id) {
+      selectedFramework = id;
+      document.querySelectorAll(".framework-card").forEach(c => {
+        c.classList.remove("selected");
+        c.querySelector(".framework-check").textContent = "";
+      });
+      const selectedCard = document.getElementById(`card-${id}`);
+      if (selectedCard) {
+        selectedCard.classList.add("selected");
+        selectedCard.querySelector(".framework-check").textContent = "✓";
+      }
+      showToast(`Selected framework: ${id.toUpperCase()}`);
+      updateExport();
+    }
+
+    /* =========================================================================
+       Export & File Generation Engine (API + Client Fallback)
+       ========================================================================= */
+    async function updateExport() {
+      const projectName = document.getElementById("input-project-name").value.trim() || "polyglot-app";
+      const appTitle = document.getElementById("input-app-title").value.trim() || "Polyglot App";
+      const appDesc = document.getElementById("input-app-desc").value.trim() || "";
+      const theme = document.getElementById("select-project-theme").value;
+      const features = [];
+      if (document.getElementById("feat-tailwind").checked) features.push("tailwind");
+      if (document.getElementById("feat-typescript").checked) features.push("typescript");
+      if (document.getElementById("feat-pwa").checked) features.push("pwa");
+      if (document.getElementById("feat-mcp").checked) features.push("mcp");
+      if (document.getElementById("feat-ci").checked) features.push("ci");
+
+      const payload = {
+        framework: selectedFramework,
+        project_name: projectName,
+        title: appTitle,
+        description: appDesc,
+        theme: theme,
+        features: features
+      };
+
+      try {
+        const res = await fetch("/api/export", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.files) {
+            currentGeneratedFiles = data.files;
+            renderFileTree();
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn("REST API /api/export unreachable, falling back to local template generator", err);
+      }
+
+      // Local fallback generation
+      currentGeneratedFiles = generateClientFallbackFiles(selectedFramework, projectName, appTitle, appDesc, theme);
+      renderFileTree();
+    }
+
+    function renderFileTree() {
+      const container = document.getElementById("file-tree-container");
+      container.innerHTML = "";
+      const filePaths = Object.keys(currentGeneratedFiles).sort();
+
+      document.getElementById("file-count").textContent = filePaths.length;
+      let totalBytes = 0;
+      filePaths.forEach(p => totalBytes += (currentGeneratedFiles[p] || "").length);
+      document.getElementById("bundle-size-tag").textContent = (totalBytes / 1024).toFixed(1) + " KB";
+
+      filePaths.forEach((path, idx) => {
+        const li = document.createElement("li");
+        li.className = `file-tree-item ${path === activeFilePath || (!activeFilePath && idx === 0) ? "active" : ""}`;
+        li.onclick = () => selectFile(path);
+
+        let icon = "📄";
+        if (path.endsWith(".json")) icon = "🔧";
+        else if (path.endsWith(".ts") || path.endsWith(".tsx") || path.endsWith(".js") || path.endsWith(".mjs")) icon = "📜";
+        else if (path.endsWith(".astro")) icon = "🚀";
+        else if (path.endsWith(".svelte")) icon = "⚡";
+        else if (path.endsWith(".vue")) icon = "💚";
+        else if (path.endsWith(".md")) icon = "📖";
+        else if (path.endsWith(".css")) icon = "🎨";
+        else if (path.endsWith(".html")) icon = "🌐";
+
+        li.innerHTML = `<span class="file-icon">${icon}</span> <span>${path}</span>`;
+        container.appendChild(li);
+      });
+
+      if (!activeFilePath || !currentGeneratedFiles[activeFilePath]) {
+        activeFilePath = filePaths[0] || "";
+      }
+      displayActiveFile();
+    }
+
+    function selectFile(path) {
+      activeFilePath = path;
+      document.querySelectorAll(".file-tree-item").forEach(el => {
+        if (el.textContent.includes(path)) el.classList.add("active");
+        else el.classList.remove("active");
+      });
+      displayActiveFile();
+    }
+
+    function displayActiveFile() {
+      const codeDisplay = document.getElementById("code-display");
+      const nameDisplay = document.getElementById("active-file-name");
+      const linesDisplay = document.getElementById("active-file-lines");
+
+      if (!activeFilePath || !currentGeneratedFiles[activeFilePath]) {
+        nameDisplay.textContent = "No file selected";
+        codeDisplay.textContent = "// Select a file to inspect";
+        linesDisplay.textContent = "0 lines";
+        return;
+      }
+
+      nameDisplay.textContent = activeFilePath;
+      const content = currentGeneratedFiles[activeFilePath];
+      codeDisplay.textContent = content;
+      const lineCount = content.split("\n").length;
+      linesDisplay.textContent = `${lineCount} lines (${content.length} B)`;
+    }
+
+    function copyActiveFile() {
+      if (!activeFilePath || !currentGeneratedFiles[activeFilePath]) return;
+      navigator.clipboard.writeText(currentGeneratedFiles[activeFilePath]);
+      showToast(`Copied ${activeFilePath} to clipboard!`);
+    }
+
+    /* =========================================================================
+       ZIP Download & API Integration
+       ========================================================================= */
+    function triggerZipDownload() {
+      const projectName = document.getElementById("input-project-name").value.trim() || "polyglot-app";
+      const appTitle = document.getElementById("input-app-title").value.trim() || "Polyglot App";
+      const theme = document.getElementById("select-project-theme").value;
+
+      showToast("Generating ZIP bundle...");
+      const url = `/api/download-zip?framework=${encodeURIComponent(selectedFramework)}&project_name=${encodeURIComponent(projectName)}&theme=${encodeURIComponent(theme)}&title=${encodeURIComponent(appTitle)}`;
+      window.location.href = url;
+    }
+
+    /* =========================================================================
+       Transpiler Sandbox
+       ========================================================================= */
+    const SAMPLE_SNIPPETS = {
+      counter: `import React, { useState } from 'react';
+
+export function Counter({ initialCount = 0 }: { initialCount?: number }) {
+  const [count, setCount] = useState(initialCount);
+
+  return (
+    <div className="p-4 bg-white rounded-xl shadow-md flex items-center gap-4">
+      <span className="text-xl font-bold">Count: {count}</span>
+      <button 
+        onClick={() => setCount(count + 1)}
+        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+      >
+        Increment
+      </button>
+      <button 
+        onClick={() => setCount(0)}
+        className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+      >
+        Reset
+      </button>
+    </div>
+  );
+}`,
+      hero: `import React from 'react';
+
+export function Hero({ title, subtitle }: { title: string; subtitle: string }) {
+  return (
+    <section className="py-20 px-6 text-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-2xl">
+      <h1 className="text-5xl font-extrabold tracking-tight mb-4">{title}</h1>
+      <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-8">{subtitle}</p>
+      <div className="flex justify-center gap-4">
+        <a href="#explore" className="px-6 py-3 bg-white text-blue-700 font-semibold rounded-xl shadow-lg">Get Started</a>
+        <a href="#docs" className="px-6 py-3 bg-blue-800 text-white font-semibold rounded-xl border border-blue-400">Documentation</a>
+      </div>
+    </section>
+  );
+}`,
+      card: `import React from 'react';
+
+interface FeatureCardProps {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export function FeatureCard({ icon, title, description }: FeatureCardProps) {
+  return (
+    <div className="p-6 border border-gray-200 rounded-2xl hover:shadow-xl transition-all duration-300 bg-white">
+      <div className="text-4xl mb-4">{icon}</div>
+      <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
+      <p className="text-gray-600 leading-relaxed">{description}</p>
+    </div>
+  );
+}`
+    };
+
+    function loadSampleSnippet(type) {
+      const code = SAMPLE_SNIPPETS[type] || "";
+      document.getElementById("transpile-input").value = code;
+      showToast(`Loaded sample snippet: ${type}`);
+    }
+
+    async function runTranspiler() {
+      const sourceFw = document.getElementById("transpile-source").value;
+      const targetFw = document.getElementById("transpile-target").value;
+      const inputCode = document.getElementById("transpile-input").value;
+      const outputEl = document.getElementById("transpile-output");
+
+      outputEl.textContent = "// Transpiling...";
+
+      try {
+        const res = await fetch("/api/convert", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            source_framework: sourceFw,
+            target_framework: targetFw,
+            code: inputCode,
+            component_name: "TranspiledComponent"
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          outputEl.textContent = data.target_code || data.code || "// Transpiled successfully (empty output)";
+          showToast(`Transpiled to ${targetFw.toUpperCase()}!`);
+          return;
+        }
+      } catch (err) {
+        console.warn("REST API /api/convert failed, performing client-side transform", err);
+      }
+
+      // Simple client fallback AST simulation
+      let converted = inputCode;
+      if (targetFw === "astro") {
+        converted = `---\n// Astro 5 Component automatically transpiled\nconst { title, subtitle } = Astro.props;\n---\n\n` + inputCode.replace(/className=/g, "class=");
+      } else if (targetFw === "svelte") {
+        converted = `<script lang="ts">\n  let { title = '', subtitle = '' } = $props();\n  let count = $state(0);\n</script>\n\n` + inputCode.replace(/onClick=\{/g, "on:click={").replace(/className=/g, "class=");
+      } else if (targetFw === "vue") {
+        converted = `<script setup lang="ts">\nimport { ref } from 'vue';\nconst count = ref(0);\n</script>\n\n<template>\n  ` + inputCode.replace(/onClick=\{/g, "@click=").replace(/className=/g, "class=") + `\n</template>`;
+      }
+      outputEl.textContent = converted;
+      showToast(`Transpiled to ${targetFw.toUpperCase()}`);
+    }
+
+    function copyTranspileOutput() {
+      const code = document.getElementById("transpile-output").textContent;
+      navigator.clipboard.writeText(code);
+      showToast("Copied transpiled code to clipboard!");
+    }
+
+    /* =========================================================================
+       Health, Diagnostics & MCP Configuration
+       ========================================================================= */
+    async function checkServerHealth() {
+      const badge = document.getElementById("server-status");
+      const text = document.getElementById("status-text");
+
+      try {
+        const res = await fetch("/api/health");
+        if (res.ok) {
+          const data = await res.json();
+          text.textContent = `Connected (v${data.version || '0.1.0'})`;
+          badge.style.background = "var(--md-sys-color-success-container)";
+          badge.style.color = "var(--md-sys-color-success)";
+          return;
+        }
+      } catch (e) {
+        // standalone mode
+      }
+      text.textContent = "Offline / Standalone";
+      badge.style.background = "var(--md-sys-color-secondary-container)";
+      badge.style.color = "var(--md-sys-color-on-secondary-container)";
+    }
+
+    async function fetchDiagnostics() {
+      const container = document.getElementById("diagnostics-json");
+      container.textContent = "Fetching diagnostics...";
+      try {
+        const res = await fetch("/api/diagnostics");
+        if (res.ok) {
+          const data = await res.json();
+          container.textContent = JSON.stringify(data, null, 2);
+          return;
+        }
+      } catch (err) {
+        container.textContent = JSON.stringify({
+          status: "standalone_browser_mode",
+          engine: "polyglot-framework-exporter",
+          version: "0.1.0",
+          frameworks: FRAMEWORKS.map(f => f.id),
+          timestamp: new Date().toISOString()
+        }, null, 2);
+      }
+    }
+
+    function openMcpModal() {
+      const config = {
+        mcpServers: {
+          "polyglot-framework-exporter": {
+            command: "python",
+            args: ["-m", "polyglot_framework_exporter", "mcp"]
+          }
+        }
+      };
+      prompt("Copy MCP Server configuration for Claude Desktop / Cursor / Cline:", JSON.stringify(config, null, 2));
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast-msg");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    /* =========================================================================
+       Client Fallback File Generator (when server is offline)
+       ========================================================================= */
+    function generateClientFallbackFiles(fw, name, title, desc, theme) {
+      const files = {};
+      files["README.md"] = `# ${title}\n\n${desc}\n\nGenerated with Polyglot Framework Exporter for **${fw}**.\n\n## Quick Start\n\`\`\`bash\nnpm install\nnpm run dev\n\`\`\`\n`;
+      files["package.json"] = JSON.stringify({
+        name: name,
+        version: "0.1.0",
+        private: true,
+        scripts: { dev: `${fw} dev`, build: `${fw} build` },
+        dependencies: { [fw]: "latest" }
+      }, null, 2);
+      files[".gitignore"] = "node_modules\n.dist\n.cache\n.env.local\n";
+      files["tsconfig.json"] = JSON.stringify({
+        compilerOptions: { target: "ES2022", module: "ESNext", jsx: "preserve", strict: true }
+      }, null, 2);
+      files["src/App.tsx"] = `export default function App() {\n  return (\n    <main className="min-h-screen p-8 bg-gray-50">\n      <h1 className="text-3xl font-bold text-blue-600">${title}</h1>\n      <p className="mt-2 text-gray-700">${desc}</p>\n    </main>\n  );\n}`;
+      return files;
+    }
+  </script>
+</body>
+</html>

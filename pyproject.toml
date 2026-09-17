@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "polyglot-framework-exporter"
+version = "0.1.0"
+description = "Pure Python stdlib cross-framework exporter, transpiler, and MCP server for Astro 5, Next.js 15, Vite React, SvelteKit, Nuxt 3, Deno Fresh, Remix, Tauri v2, Electron (Zero External Dependencies)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Polyglot Framework Team", email = "dev@polyglot-framework-exporter.org" }
+]
+keywords = [
+    "polyglot",
+    "framework-exporter",
+    "astro",
+    "nextjs",
+    "vite",
+    "react",
+    "sveltekit",
+    "nuxt",
+    "deno-fresh",
+    "remix",
+    "tauri",
+    "electron",
+    "transpiler",
+    "code-generation",
+    "mcp",
+    "model-context-protocol"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: User Interfaces",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers"
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0"
+]
+
+[project.scripts]
+polyglot-exporter = "polyglot_framework_exporter.cli:main"
+deepsearch-exporter = "polyglot_framework_exporter.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/polyglot-framework/polyglot-framework-exporter"
+Documentation = "https://github.com/polyglot-framework/polyglot-framework-exporter#readme"
+Repository = "https://github.com/polyglot-framework/polyglot-framework-exporter.git"
+Issues = "https://github.com/polyglot-framework/polyglot-framework-exporter/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra -q"
