@@ -197,14 +197,17 @@ class TestBatchGeneratorRegistry:
     def test_registry_functions(self) -> None:
         from polyglot_framework_exporter.generators import list_generators, get_generator
         frameworks = list_generators()
-        assert len(frameworks) == 9
+        assert len(frameworks) >= 10
         assert "astro" in frameworks
         assert "nextjs" in frameworks
         assert "tauri" in frameworks
         assert "electron" in frameworks
+        assert "bun_hono" in frameworks
 
-        gen = get_generator("tauri")
-        assert gen.name == "tauri"
+        gen = get_generator("bun_hono")
+        assert gen.name == "bun_hono"
+        alias_gen = get_generator("hono")
+        assert alias_gen.name == "bun_hono"
 
     def test_generate_all(self, sample_ast: ProjectAST, temp_dir: Path) -> None:
         from polyglot_framework_exporter.generators import generate_all

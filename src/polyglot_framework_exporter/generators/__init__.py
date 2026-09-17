@@ -20,6 +20,7 @@ from typing import Any, Dict, List, Optional, Type, Union
 from ..compat import ensure_directory
 from ..transpiler import ProjectAST
 from .astro_generator import AstroGenerator
+from .bun_hono_generator import BunHonoGenerator
 from .deno_fresh_generator import DenoFreshGenerator
 from .electron_generator import ElectronGenerator
 from .nextjs_generator import NextjsGenerator
@@ -32,6 +33,7 @@ from .vite_react_generator import ViteReactGenerator
 # Generator Registry
 GENERATORS: Dict[str, Any] = {
     "astro": AstroGenerator,
+    "bun_hono": BunHonoGenerator,
     "nextjs": NextjsGenerator,
     "vite_react": ViteReactGenerator,
     "svelte": SvelteGenerator,
@@ -52,6 +54,8 @@ ALIASES: Dict[str, str] = {
     "fresh": "deno_fresh",
     "deno": "deno_fresh",
     "react_router": "remix",
+    "hono": "bun_hono",
+    "bun": "bun_hono",
 }
 
 
@@ -115,6 +119,7 @@ def generate(
 
 __all__ = [
     "AstroGenerator",
+    "BunHonoGenerator",
     "NextjsGenerator",
     "ViteReactGenerator",
     "SvelteGenerator",
