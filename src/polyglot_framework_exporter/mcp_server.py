@@ -84,13 +84,37 @@ FRAMEWORK_CATALOG: Dict[str, Dict[str, Any]] = {
         "id": "solid",
         "name": "SolidJS",
         "category": "spa",
-        "version": "1.8.18",
+        "version": "1.9.4",
         "template": "vite-solid-ts",
         "language": "TypeScript",
         "primary_extension": ".tsx",
         "styling": ["Tailwind CSS", "M3 Tokens", "CSS Modules"],
         "features": ["Fine-grained Reactivity", "JSX without Virtual DOM", "Vite Bundler"],
         "description": "Ultra-fast fine-grained reactive components with JSX syntax and Material 3 design system.",
+    },
+    "solidstart": {
+        "id": "solidstart",
+        "name": "SolidStart 1.0 (SolidJS)",
+        "category": "meta",
+        "version": "1.0.10",
+        "template": "solidstart-ts",
+        "language": "TypeScript",
+        "primary_extension": ".tsx",
+        "styling": ["Tailwind CSS", "M3 Tokens"],
+        "features": ["SolidStart Full-Stack", "Fine-grained Reactivity", "Vinxi Bundler", "Zero Virtual DOM"],
+        "description": "Ultra-fast full-stack SolidStart 1.0 application powered by SolidJS and Vinxi.",
+    },
+    "bun_hono": {
+        "id": "bun_hono",
+        "name": "Bun + Hono 4",
+        "category": "meta",
+        "version": "4.6.14",
+        "template": "bun-hono-ts",
+        "language": "TypeScript",
+        "primary_extension": ".ts",
+        "styling": ["Tailwind CSS", "M3 Tokens"],
+        "features": ["Bun Runtime", "Hono 4 Web API", "Edge Microservices", "Zod Validation"],
+        "description": "Ultra-fast server-side TypeScript edge microservice and web server powered by Bun and Hono 4.",
     },
     "angular": {
         "id": "angular",
@@ -866,6 +890,8 @@ def generate_project_scaffold(
         from .generators.astro_generator import AstroGenerator
         from .generators.svelte_generator import SvelteGenerator
         from .generators.nuxt_generator import NuxtGenerator
+        from .generators.bun_hono_generator import BunHonoGenerator
+        from .generators.solidstart_generator import SolidStartGenerator
 
         gen_classes: Dict[str, Any] = {
             "react": ViteReactGenerator,
@@ -874,6 +900,12 @@ def generate_project_scaffold(
             "next": NextjsGenerator,
             "astro": AstroGenerator,
             "svelte": SvelteGenerator,
+            "solidstart": SolidStartGenerator,
+            "solid": SolidStartGenerator,
+            "solidjs": SolidStartGenerator,
+            "bun_hono": BunHonoGenerator,
+            "hono": BunHonoGenerator,
+            "bun": BunHonoGenerator,
             "vue": NuxtGenerator,
             "nuxt": NuxtGenerator,
         }

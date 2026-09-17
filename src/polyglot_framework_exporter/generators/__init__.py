@@ -26,6 +26,7 @@ from .electron_generator import ElectronGenerator
 from .nextjs_generator import NextjsGenerator
 from .nuxt_generator import NuxtGenerator
 from .remix_generator import RemixGenerator
+from .solidstart_generator import SolidStartGenerator
 from .svelte_generator import SvelteGenerator
 from .tauri_generator import TauriGenerator
 from .vite_react_generator import ViteReactGenerator
@@ -37,6 +38,7 @@ GENERATORS: Dict[str, Any] = {
     "nextjs": NextjsGenerator,
     "vite_react": ViteReactGenerator,
     "svelte": SvelteGenerator,
+    "solidstart": SolidStartGenerator,
     "nuxt": NuxtGenerator,
     "deno_fresh": DenoFreshGenerator,
     "remix": RemixGenerator,
@@ -50,6 +52,8 @@ ALIASES: Dict[str, str] = {
     "react": "vite_react",
     "vite": "vite_react",
     "sveltekit": "svelte",
+    "solid": "solidstart",
+    "solidjs": "solidstart",
     "vue": "nuxt",
     "fresh": "deno_fresh",
     "deno": "deno_fresh",
