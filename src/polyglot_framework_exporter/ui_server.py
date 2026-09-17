@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Google Framework Studio UI Server for Polyglot Framework Exporter.
+"""Polyglot Studio UI Server for Polyglot Framework Exporter.
 
-Zero-dependency, multi-threaded HTTP server providing Google Material 3 Web UI
+Zero-dependency, multi-threaded HTTP server providing Web UI (design influenced by Material 3)
 and REST API endpoints for scaffolding, AST component transpilation, in-memory ZIP
 streaming, diagnostics, and MCP configuration.
 
@@ -119,7 +119,7 @@ FALLBACK_EMBEDDED_HTML = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Framework Studio • Standalone</title>
+  <title>Polyglot Studio • Standalone</title>
   <style>
     :root {
       --bg: #f8f9fa; --surface: #ffffff; --primary: #1a73e8; --text: #202124; --text-muted: #5f6368;
@@ -136,7 +136,7 @@ FALLBACK_EMBEDDED_HTML = """<!DOCTYPE html>
 </head>
 <body>
   <div class="card">
-    <h1>Google Framework Studio</h1>
+    <h1>Polyglot Studio</h1>
     <p>Polyglot Multi-Framework Exporter UI Server is running. All REST APIs are online and active.</p>
     <div class="actions">
       <a class="btn" href="/api/health" target="_blank">Health Status</a>
@@ -213,7 +213,7 @@ def get_supported_frameworks_list() -> List[Dict[str, Any]]:
 # ==============================================================================
 
 class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
-    """Custom HTTP handler serving Google Framework Studio UI and REST APIs."""
+    """Custom HTTP handler serving Polyglot Studio UI and REST APIs."""
 
     server_version = "PolyglotStudioServer/0.1.0"
 
@@ -307,7 +307,7 @@ class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
         health_data = {
             "status": "ok",
             "version": "0.1.0",
-            "service": "Google Framework Studio & Polyglot Exporter",
+            "service": "Polyglot Studio & Framework Exporter",
             "uptime_seconds": uptime,
             "python_version": sys.version.split()[0],
             "platform": platform.system(),
@@ -531,7 +531,7 @@ def create_ui_server(
     port: int = 8080,
     handler_class: Any = StudioHTTPRequestHandler,
 ) -> ThreadingHTTPServer:
-    """Instantiate a ThreadingHTTPServer configured for Google Framework Studio."""
+    """Instantiate a ThreadingHTTPServer configured for Polyglot Studio."""
     actual_port = find_available_port(host, port)
     server = ThreadingHTTPServer((host, actual_port), handler_class)
     server.daemon_threads = True
@@ -549,7 +549,7 @@ def run_ui_server(
     url = f"http://{host}:{actual_port}/"
 
     print("=" * 70)
-    print("  🚀 Google Framework Studio & Polyglot Exporter UI Server")
+    print("  🚀 Polyglot Studio & Framework Exporter UI Server")
     print(f"  🌐 Studio UI: {url}")
     print(f"  ⚡ REST API:  {url}api/health")
     print("  📦 Zero Runtime Dependencies (Pure Python stdlib)")
@@ -565,7 +565,7 @@ def run_ui_server(
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\nStopping Google Framework Studio UI server...")
+        print("\nStopping Polyglot Studio UI server...")
     finally:
         server.server_close()
 
@@ -577,7 +577,7 @@ def run_ui_server(
 def main() -> int:
     """CLI entrypoint for running the studio UI server directly."""
     parser = argparse.ArgumentParser(
-        description="Google Framework Studio Web UI Server for Polyglot Exporter"
+        description="Polyglot Studio Web UI Server for Polyglot Exporter"
     )
     parser.add_argument("--host", default="127.0.0.1", help="Host interface to bind (default: 127.0.0.1)")
     parser.add_argument("--port", "-p", type=int, default=8080, help="Port to listen on (default: 8080)")

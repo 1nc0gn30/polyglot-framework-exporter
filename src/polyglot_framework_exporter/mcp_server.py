@@ -986,7 +986,7 @@ def generate_project_scaffold(
             "  <head>\n"
             "    <meta charset=\"UTF-8\" />\n"
             "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n"
-            f"    <title>{project_name} - Google Material 3 Studio</title>\n"
+            f"    <title>{project_name} - Polyglot Studio</title>\n"
             "  </head>\n"
             "  <body class=\"bg-surface text-on-surface font-sans antialiased\">\n"
             "    <div id=\"root\"></div>\n"
@@ -1069,7 +1069,7 @@ def generate_project_scaffold(
             "          >\n"
             "            Count is {count}\n"
             "          </button>\n"
-            "          <span className=\"text-xs text-zinc-400\">Google Material 3 Polyglot Exporter</span>\n"
+            "          <span className=\"text-xs text-zinc-400\">Polyglot Studio</span>\n"
             "        </div>\n"
             "      </div>\n"
             "    </div>\n"
@@ -1185,7 +1185,7 @@ def generate_project_scaffold(
             "</script>\n\n"
             "<main class=\"container\">\n"
             f"  <h1>{project_name}</h1>\n"
-            "  <p>Svelte 5 Runes ($state) + Google Material 3</p>\n"
+            "  <p>Svelte 5 Runes ($state) • Material 3 Design</p>\n"
             "  <button onclick={() => count++}>\n"
             "    Count: {count}\n"
             "  </button>\n"
@@ -1304,7 +1304,7 @@ def generate_project_scaffold(
         clean_pkg = project_name.lower().replace('-', '_')
         files["pubspec.yaml"] = (
             f"name: {clean_pkg}\n"
-            "description: \"Google Material 3 Polyglot Exported Flutter App\"\n"
+            "description: \"Polyglot Studio Exported Flutter App\"\n"
             "version: 1.0.0+1\n"
             "environment:\n"
             "  sdk: '>=3.0.0 <4.0.0'\n\n"
@@ -1707,7 +1707,7 @@ class MCPServer:
         self._resources["polyglot://themes"] = {
             "uri": "polyglot://themes",
             "name": "Material 3 Theme Presets",
-            "description": "Color tokens and palette specifications for Google Material 3 presets.",
+            "description": "Color tokens and palette specifications influenced by Material 3 presets.",
             "mimeType": "application/json",
         }
 

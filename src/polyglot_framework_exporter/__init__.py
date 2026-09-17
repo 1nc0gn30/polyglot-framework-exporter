@@ -2,7 +2,7 @@
 
 Export web and native projects to React 19, Vue 3.5, Svelte 5, SolidJS,
 Angular 18+, Astro 4, Qwik, Next.js 15, Flutter 3.24+, SwiftUI, and Jetpack Compose
-with Google Material Design 3 dynamic color tokens and clean, deterministic ZIP packaging.
+with Material 3 influenced dynamic color tokens and clean, deterministic ZIP packaging.
 
 Pure Python standard library only (zero external runtime dependencies).
 """
@@ -14,9 +14,9 @@ from typing import Any, Dict, List, Optional, Union
 
 # Metadata
 __version__ = "0.1.0"
-__author__ = "Google DeepMind / Polyglot Exporter Team"
+__author__ = "Polyglot Exporter Team"
 __license__ = "Apache-2.0"
-__description__ = "Google Material 3 Polyglot Framework Exporter"
+__description__ = "Polyglot Studio - Universal Multi-Framework Scaffolder & AST Transpiler (design influenced by Material 3)"
 
 # Submodule exports
 from .zip_bundler import (

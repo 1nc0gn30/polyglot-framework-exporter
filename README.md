@@ -18,7 +18,7 @@
 Built with **zero third-party runtime dependencies**, it includes:
 1. **Multi-Framework Generators**: Full project scaffolding for Astro 5, Next.js 15, Vite React 19, SvelteKit 2, Nuxt 3, Deno Fresh 2, Remix / React Router v7, Tauri v2, and Electron 30+.
 2. **Universal Component AST Transpiler**: Cross-framework component converter translating JSX/TSX, Svelte runes, Vue 3 Composition SFCs, and Astro templates.
-3. **Google Framework Studio Web UI**: Google Material 3 Light Mode dashboard with interactive framework selector, theme picker, live file tree inspector, syntax preview, and 1-click in-memory ZIP downloader.
+3. **Polyglot Studio Web UI**: Material 3 styled dashboard (design influenced by Material 3) with interactive framework selector, theme picker, live file tree inspector, syntax preview, and 1-click in-memory ZIP downloader.
 4. **Model Context Protocol (MCP) Server**: Native JSON-RPC 2.0 stdio server providing LLMs (Claude Desktop, Cursor, Cline) with direct scaffolding and transpilation tools.
 5. **Deterministic In-Memory ZIP Bundler**: `io.BytesIO` archive generator for reproducible, instant `.zip` downloads without disk pollution.
 
@@ -44,7 +44,7 @@ Built with **zero third-party runtime dependencies**, it includes:
 
 Every generated project includes a complete design token mapping supporting 6 Master Themes:
 
-- **Google Material 3 Light (`light_material`)**: Clean Google design with Google Sans/Roboto, Google Blue (`#1a73e8`), elevation shadows, and rounded container cards.
+- **Material 3 Light (`light_material`)**: Clean design influenced by Google Material Design 3 tokens, elevation shadows, and rounded container cards.
 - **Material 3 Dark (`material_dark`)**: High-contrast dark mode with tonal surface elevation (`#121212` / `#1e1e1e`) and blue accents (`#8ab4f8`).
 - **Obsidian Gold (`obsidian_gold`)**: Deep obsidian dark surfaces (`#0a0a0a`) paired with gold metallic accents (`#ffd700`).
 - **Midnight Neon (`midnight_neon`)**: Cyberpunk aesthetic featuring deep space navy (`#070913`) and electric cyan/magenta (`#00f0ff` / `#ff007f`).
@@ -64,8 +64,8 @@ Every generated project includes a complete design token mapping supporting 6 Ma
                    │                             │                             │
                    ▼                             ▼                             ▼
         ┌─────────────────────┐       ┌─────────────────────┐       ┌─────────────────────┐
-        │  CLI Interface      │       │ Google Framework    │       │  Model Context      │
-        │  (polyglot-exporter)│       │ Studio (Web UI/API) │       │  Protocol (MCP)     │
+        │  CLI Interface      │       │ Polyglot Studio     │       │  Model Context      │
+        │  (polyglot-exporter)│       │ (Web UI/API)        │       │  Protocol (MCP)     │
         └──────────┬──────────┘       └──────────┬──────────┘       └──────────┬──────────┘
                    │                             │                             │
                    └─────────────────────────────┼─────────────────────────────┘
@@ -106,7 +106,7 @@ cd polyglot-framework-exporter
 pip install -e .
 ```
 
-### 2. Launch Google Framework Studio (Web UI)
+### 2. Launch Polyglot Studio (Web UI)
 
 Start the interactive Material 3 Web Studio on `http://127.0.0.1:8080`:
 
@@ -154,7 +154,7 @@ Commands:
   export       Scaffold a complete framework project to disk or .zip
   list         List all supported target frameworks and metadata
   transpile    Transpile a component or HTML snippet across frameworks
-  serve        Launch Google Framework Studio Web UI & REST API server
+  serve        Launch Polyglot Studio Web UI & REST API server
   mcp          Start Model Context Protocol (MCP) server over stdio
   diagnostics  Display system environment, path, and runtime diagnostics
 
@@ -219,7 +219,7 @@ When the UI Server is running (`polyglot-exporter serve`), the following REST en
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/` | Serves Google Framework Studio UI (`public/index.html`) |
+| `GET` | `/` | Serves Polyglot Studio UI (`public/index.html`) |
 | `GET` | `/api/health` | Server uptime, version, and health status |
 | `GET` | `/api/frameworks` | List all 9 supported frameworks with metadata |
 | `POST` | `/api/export` | Generate project file tree JSON for a framework |

@@ -2,7 +2,7 @@
 
 Converts raw semantic HTML, Markdown with frontmatter, or JSON schemas into
 structured Component Trees (ProjectAST) supporting all 6 Master Themes:
-- Light Google Material 3 (`light_material` / `google_material_3`)
+- Material 3 Light (Google Influenced) (`light_material` / `google_material_3`)
 - Obsidian Gold (`obsidian_gold`)
 - Midnight Neon (`midnight_neon`)
 - Acid Grid (`acid_grid`)
@@ -102,8 +102,8 @@ class ThemeConfig:
 THEMES: Dict[str, ThemeConfig] = {
     "light_material": ThemeConfig(
         name="light_material",
-        display_name="Light Google Material 3",
-        description="Clean, modern Google Material Design 3 palette with pastel slate, indigo accents and high contrast readability.",
+        display_name="Material 3 Light (Google Influenced)",
+        description="Clean, modern palette influenced by Google Material Design 3 with pastel slate, indigo accents and high contrast readability.",
         is_dark=False,
         bg_primary="#f8fafc",
         bg_secondary="#f1f5f9",
@@ -132,7 +132,7 @@ THEMES: Dict[str, ThemeConfig] = {
     ),
     "google_material_3": ThemeConfig(
         name="google_material_3",
-        display_name="Light Google Material 3",
+        display_name="Material 3 Light (Google Influenced)",
         description="Alias for light_material.",
         is_dark=False,
         bg_primary="#f8fafc",
@@ -417,7 +417,7 @@ class FeaturesComponent:
         {
             "icon": "palette",
             "title": "6 Master Themes",
-            "description": "Pre-tuned design systems spanning Obsidian Gold, Midnight Neon, Acid Grid, and Google Material 3.",
+            "description": "Pre-tuned design systems spanning Obsidian Gold, Midnight Neon, Acid Grid, and Material 3.",
             "badge": "Design"
         },
         {

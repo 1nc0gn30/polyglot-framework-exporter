@@ -114,7 +114,7 @@ def print_banner() -> None:
                 |___/ |___/                          |_|                   
 """
     print(tc.cyan(banner))
-    print(tc.bold(f"  Google Material 3 Polyglot Framework Exporter v{__version__}"))
+    print(tc.bold(f"  Polyglot Studio - Framework Exporter v{__version__}"))
     print(tc.dim("  Export production apps to React, Vue, Svelte, Solid, Angular, Flutter, SwiftUI & more\n"))
 
 
@@ -127,7 +127,7 @@ EMBEDDED_STUDIO_HTML = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material 3 Polyglot Framework Studio</title>
+  <title>Polyglot Framework Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -166,7 +166,7 @@ EMBEDDED_STUDIO_HTML = """<!DOCTYPE html>
         <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/30">M3</div>
         <div>
           <h1 class="font-bold text-base tracking-tight">Polyglot Framework Studio</h1>
-          <p class="text-xs text-zinc-400">Google Material Design 3 Multi-Target Exporter</p>
+          <p class="text-xs text-zinc-400">Universal Multi-Target Framework Exporter (Material 3 influenced)</p>
         </div>
       </div>
       <div class="flex items-center gap-3">
@@ -501,7 +501,7 @@ def run_studio_server(host: str = "127.0.0.1", port: int = 8080, open_browser: b
     try:
         with socketserver.TCPServer((host, port), handler_factory) as httpd:
             url = f"http://{host}:{port}"
-            print(f"{tc.badge('STUDIO', 'green')} Google Material 3 Framework Studio running at: {tc.bold(url)}")
+            print(f"{tc.badge('STUDIO', 'green')} Polyglot Studio running at: {tc.bold(url)}")
             print(f"{tc.dim('Press Ctrl+C to stop the server.')}\n")
 
             if open_browser:
@@ -801,7 +801,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
     """Construct top-level argument parser with all subcommands."""
     parser = argparse.ArgumentParser(
         prog="polyglot-framework-exporter",
-        description="Google Material 3 Polyglot Framework Exporter CLI & MCP Server.",
+        description="Polyglot Studio - Universal Multi-Framework Exporter CLI & MCP Server (design influenced by Material 3).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
@@ -838,7 +838,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
     p_fw.add_argument("--json", action="store_true", help="Output as JSON.")
 
     # Subcommand: serve
-    p_serve = subparsers.add_parser("serve", help="Launch the Google Material 3 Framework Studio Web UI.")
+    p_serve = subparsers.add_parser("serve", help="Launch the Polyglot Studio Web UI.")
     p_serve.add_argument("-H", "--host", default="127.0.0.1", help="Host address to bind (default: 127.0.0.1).")
     p_serve.add_argument("-p", "--port", type=int, default=8080, help="Port to listen on (default: 8080).")
     p_serve.add_argument("-b", "--open", action="store_true", help="Auto-open browser on startup.")

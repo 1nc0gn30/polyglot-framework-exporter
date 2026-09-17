@@ -50,7 +50,7 @@ class TestLiveUIServerAPIs:
             content_type = resp.headers.get("Content-Type", "")
             assert "text/html" in content_type
             body = resp.read().decode("utf-8")
-            assert "Google Framework Studio" in body or "Polyglot" in body
+            assert "Polyglot Studio" in body or "Polyglot" in body
 
     def test_api_health(self, live_ui_server: str) -> None:
         url = f"{live_ui_server}/api/health"
