@@ -267,6 +267,9 @@ class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
             self.handle_api_frameworks()
         elif path == "/api/diagnostics":
             self.handle_api_diagnostics()
+        elif path.startswith("/api/deploy-configs"):
+            fw = path.replace("/api/deploy-configs", "").strip("/") or query.get("framework", ["vite_react"])[0]
+            self.handle_api_deploy_configs({"framework": fw})
         elif path == "/api/download-zip":
             self.handle_api_download_zip_get(query)
         elif path.startswith("/api/"):
@@ -292,6 +295,8 @@ class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
             self.handle_api_export(body_json)
         elif path in ("/api/convert", "/api/transpile"):
             self.handle_api_convert(body_json)
+        elif path == "/api/deploy-configs":
+            self.handle_api_deploy_configs(body_json)
         elif path == "/api/download-zip":
             self.handle_api_download_zip_post(body_json)
         else:
@@ -300,6 +305,25 @@ class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
     # --------------------------------------------------------------------------
     # API Handlers
     # --------------------------------------------------------------------------
+
+    def handle_api_deploy_configs(self, payload: Dict[str, Any]) -> None:
+        """Generate and return deployment configurations (Dockerfile, netlify, vercel, wrangler, CI)."""
+        from .deploy_configs import generate_all_deploy_configs
+        fw = payload.get("framework", "vite_react")
+        name = payload.get("project_name", "app")
+        try:
+            configs = generate_all_deploy_configs(fw)
+            self.send_json_response({
+                "success": True,
+                "framework": fw,
+                "project_name": name,
+                "configs": configs,
+                "manifest_count": len(configs),
+                "manifests": list(configs.keys()),
+            })
+        except Exception as err:
+            logger.exception("Error in /api/deploy-configs")
+            self.send_error_json(f"Deploy config generation failed: {err}", status=500)
 
     def handle_api_health(self) -> None:
         """GET /api/health - returns server uptime, version, and status."""

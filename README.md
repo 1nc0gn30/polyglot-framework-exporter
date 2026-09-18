@@ -6,21 +6,22 @@
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://python.org)
 [![Zero Dependencies](https://img.shields.io/badge/runtime%20dependencies-0%20(pure%20stdlib)-success.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Frameworks](https://img.shields.io/badge/frameworks-9%20supported-orange.svg)](#-supported-frameworks-matrix)
+[![Frameworks](https://img.shields.io/badge/frameworks-13%20supported-orange.svg)](#-supported-frameworks-matrix)
 [![Themes](https://img.shields.io/badge/themes-6%20master%20presets-purple.svg)](#-master-theme-system)
 
 ---
 
 ## 📖 Overview
 
-**Polyglot Framework Exporter** is a pure Python standard-library engine designed to transform semantic HTML, component ASTs, and design specifications into production-ready web and desktop projects across **9 modern frameworks** in seconds.
+**Polyglot Framework Exporter** is a pure Python standard-library engine designed to transform semantic HTML, component ASTs, and design specifications into production-ready web and desktop projects across **13 modern frameworks** in seconds.
 
 Built with **zero third-party runtime dependencies**, it includes:
-1. **Multi-Framework Generators**: Full project scaffolding for Astro 5, Next.js 15, Vite React 19, SvelteKit 2, Nuxt 3, Deno Fresh 2, Remix / React Router v7, Tauri v2, and Electron 30+.
-2. **Universal Component AST Transpiler**: Cross-framework component converter translating JSX/TSX, Svelte runes, Vue 3 Composition SFCs, and Astro templates.
-3. **Polyglot Studio Web UI**: Material 3 styled dashboard (design influenced by Material 3) with interactive framework selector, theme picker, live file tree inspector, syntax preview, and 1-click in-memory ZIP downloader.
-4. **Model Context Protocol (MCP) Server**: Native JSON-RPC 2.0 stdio server providing LLMs (Claude Desktop, Cursor, Cline) with direct scaffolding and transpilation tools.
-5. **Deterministic In-Memory ZIP Bundler**: `io.BytesIO` archive generator for reproducible, instant `.zip` downloads without disk pollution.
+1. **Multi-Framework Generators**: Full project scaffolding for Astro 5, Next.js 15, Vite React 19, SvelteKit 2, Nuxt 3, Deno Fresh 2, Remix / React Router v7, Bun + Hono 4, SolidStart 1.0, Qwik City 1.x, HTMX 2.0 + Alpine.js, Tauri v2, and Electron 30+.
+2. **Multi-Target Deployment Configs**: Automated synthesis of Dockerfile, `.dockerignore`, `netlify.toml`, `vercel.json`, `wrangler.jsonc`, and GitHub Actions CI/CD workflows for any target framework.
+3. **Universal Component AST Transpiler**: Cross-framework component converter translating JSX/TSX, Svelte runes, Vue 3 Composition SFCs, and Astro templates.
+4. **Polyglot Studio Web UI**: Material 3 styled dashboard (design influenced by Material 3) with interactive framework selector, theme picker, live file tree inspector, syntax preview, and 1-click in-memory ZIP downloader.
+5. **Model Context Protocol (MCP) Server**: Native JSON-RPC 2.0 stdio server providing LLMs (Claude Desktop, Cursor, Cline) with direct scaffolding, transpilation, and deploy tools.
+6. **Deterministic In-Memory ZIP Bundler**: `io.BytesIO` archive generator for reproducible, instant `.zip` downloads without disk pollution.
 
 ---
 
@@ -35,6 +36,10 @@ Built with **zero third-party runtime dependencies**, it includes:
 | 💚 **Nuxt** | 3.14.0 | Universal Fullstack SSR | Vue 3 Composition API (`<script setup>`) | Nitro / Vite | `3000` | Universal Deployments |
 | 🍋 **Deno Fresh** | 2.0.0 | Islands Architecture | Preact + JIT Zero-Build | Deno Native | `8000` | Deno Deploy, Edge |
 | 💿 **Remix / RRv7** | 2.12.0 | Web Standards Fullstack | Nested Loaders & Actions | Vite 6 | `3000` | Netlify, Fly.io, Cloudflare |
+| 🍞 **Bun + Hono** | 4.6.14 | Edge API & Fullstack | TypeScript Server Actions + Zod | Bun Native | `3000` | Cloudflare, Fly.io, Edge |
+| 💙 **SolidStart** | 1.0.10 | Fine-Grained Fullstack | Signals / No Virtual DOM | Vinxi / Vite | `3000` | Netlify, Vercel, Node |
+| ⚡ **Qwik City** | 1.12.0 | Resumable SSR / SPA | Signals + Lazy Closures (`$`) | Vite 6 | `5173` | Cloudflare Pages, Edge |
+| ⚡ **HTMX + Alpine** | 2.0.4 | Hypermedia Single-Page | Alpine Client State + Python Server | Zero-Build | `8000` | Python Hosting, Docker, VPS |
 | 🦀 **Tauri** | 2.0.0 | Lightweight Native Desktop | Rust Backend + Webview Frontend | Cargo / Vite | Desktop | macOS, Windows, Linux (.app/.exe/.deb) |
 | ⚡ **Electron** | 33.0.0 | Cross-Platform Desktop | Chromium + Node.js IPC Bridge | Vite / Node | Desktop | Windows, macOS, Linux (.exe/.dmg) |
 
@@ -204,12 +209,12 @@ Add to `.cursor/mcp.json` in your workspace:
 
 ### 3. Exposed MCP Tools
 
-- **`polyglot_export`**: Scaffold and generate a complete application for any framework (Astro, Next.js, Vite React, SvelteKit, Nuxt, Deno Fresh, Remix, Tauri, Electron) with themes and Tailwind.
-- **`polyglot_list_frameworks`**: Query all supported frameworks, versions, templates, and styling options.
-- **`polyglot_transpile`**: Transpile raw HTML, JSX, or component trees to idiomatic target framework code.
-- **`polyglot_bundle_zip`**: Generate in-memory ZIP binary bundles with deterministic hashes.
-- **`polyglot_validate`**: Validate project structure, dependencies, and configuration sanity.
-- **`polyglot_diagnostics`**: Inspect system environment and framework readiness.
+- **`exporter_generate`**: Scaffold and generate a complete application for any framework with themes and Tailwind.
+- **`exporter_supported_frameworks`**: Query all supported frameworks, versions, templates, and styling options.
+- **`exporter_convert_html`**: Transpile raw HTML, JSX, or component trees to idiomatic target framework code.
+- **`exporter_validate_scaffold`**: Validate project structure, dependencies, and configuration sanity.
+- **`exporter_diagnostics`**: Inspect system environment and framework readiness.
+- **`exporter_deploy_configs`**: Generate production deployment configurations (Dockerfile, .dockerignore, netlify.toml, vercel.json, wrangler.jsonc, deploy.yml).
 
 ---
 
@@ -221,10 +226,11 @@ When the UI Server is running (`polyglot-exporter serve`), the following REST en
 | :--- | :--- | :--- |
 | `GET` | `/` | Serves Polyglot Studio UI (`public/index.html`) |
 | `GET` | `/api/health` | Server uptime, version, and health status |
-| `GET` | `/api/frameworks` | List all 9 supported frameworks with metadata |
+| `GET` | `/api/frameworks` | List all 13 supported frameworks with metadata |
 | `POST` | `/api/export` | Generate project file tree JSON for a framework |
 | `POST` | `/api/convert` | Transpile component code across frameworks |
 | `GET/POST`| `/api/download-zip` | Stream an in-memory binary `.zip` file download |
+| `GET/POST`| `/api/deploy-configs` | Synthesize Dockerfile, Netlify, Vercel, Cloudflare, and CI configs |
 | `GET` | `/api/diagnostics` | System diagnostics, CPU, memory, and runtime environment |
 
 ---

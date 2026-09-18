@@ -21,6 +21,7 @@ import shutil
 import socketserver
 import sys
 import time
+import traceback
 import urllib.parse
 import webbrowser
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -623,6 +624,7 @@ def run_self_verification_tests(verbose: bool = False) -> bool:
         assert "exporter_convert_html" in tool_names
         assert "exporter_validate_scaffold" in tool_names
         assert "exporter_diagnostics" in tool_names
+        assert "exporter_deploy_configs" in tool_names
 
         # Call tool
         call_res = server.handle_request({
@@ -672,6 +674,11 @@ def handle_export(args: argparse.Namespace) -> None:
         options=options,
     )
 
+    if getattr(args, "deploy", False):
+        from .deploy_configs import generate_all_deploy_configs
+        deploy_manifests = generate_all_deploy_configs(framework)
+        file_tree.update(deploy_manifests)
+
     if args.dry_run:
         print(f"\n{tc.bold('Dry run preview:')}")
         for path in sorted(file_tree.keys()):
@@ -708,6 +715,28 @@ def handle_export(args: argparse.Namespace) -> None:
     print(f"  cd {out_dir}")
     print("  npm install")
     print("  npm run dev\n")
+
+
+def handle_deploy_configs(args: argparse.Namespace) -> None:
+    """Handle `deploy-configs <framework>` subcommand."""
+    from .deploy_configs import generate_all_deploy_configs
+    framework = args.framework.lower().strip()
+    project_name = args.name or "app"
+    configs = generate_all_deploy_configs(framework)
+
+    if args.output:
+        out_p = Path(args.output)
+        out_p.mkdir(parents=True, exist_ok=True)
+        for rel_path, content in configs.items():
+            dest = out_p / rel_path
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(content, encoding="utf-8")
+        print(f"{tc.badge('SUCCESS', 'green')} Deployment manifests written to {tc.bold(str(out_p.resolve()))}")
+    else:
+        print(f"\n{tc.badge('DEPLOY', 'cyan')} Generated Deployment Manifests for {tc.bold(framework)}:\n")
+        for name in sorted(configs.keys()):
+            print(f"  ├── {tc.green(name)} ({len(configs[name])} chars)")
+        print(f"\nUse {tc.cyan('-o <dir>')} to write files to disk.\n")
 
 
 def handle_convert(args: argparse.Namespace) -> None:
@@ -812,7 +841,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
 
     # Subcommand: export
     p_export = subparsers.add_parser("export", help="Generate full project files or ZIP for target framework.")
-    p_export.add_argument("framework", help="Target framework (e.g., react, vue, svelte, solid, angular, flutter, swiftui, vanilla).")
+    p_export.add_argument("framework", help="Target framework (e.g., react, vue, svelte, solid, angular, qwik, htmx, flutter, swiftui, vanilla).")
     p_export.add_argument("-o", "--output", help="Output directory or ZIP archive path.")
     p_export.add_argument("-z", "--zip", action="store_true", help="Bundle output as a clean, deterministic ZIP archive.")
     p_export.add_argument("-t", "--theme", default="system", choices=list(THEME_PRESETS.keys()), help="Material 3 theme preset.")
@@ -821,7 +850,14 @@ def build_cli_parser() -> argparse.ArgumentParser:
     p_export.add_argument("--no-typescript", action="store_false", dest="typescript", help="Disable TypeScript.")
     p_export.add_argument("--styling", default="tailwind", help="Styling approach (tailwind, m3, scoped).")
     p_export.add_argument("--include-routing", action="store_true", help="Include multi-page client routing setup.")
+    p_export.add_argument("--deploy", action="store_true", help="Include production deployment configurations (Dockerfile, netlify.toml, vercel.json, wrangler.jsonc, deploy.yml).")
     p_export.add_argument("--dry-run", action="store_true", help="Preview file generation without writing.")
+
+    # Subcommand: deploy-configs
+    p_dep = subparsers.add_parser("deploy-configs", help="Generate production deployment configurations for a target framework.")
+    p_dep.add_argument("framework", help="Target framework (e.g., nextjs, astro, vite_react, svelte, qwik, htmx, bun_hono, nuxt).")
+    p_dep.add_argument("-o", "--output", help="Output directory to write deployment manifests.")
+    p_dep.add_argument("-n", "--name", default="app", help="Project name (default: 'app').")
 
     # Subcommand: convert
     p_convert = subparsers.add_parser("convert", help="Transpile arbitrary HTML/Tailwind to target framework component.")
@@ -875,6 +911,8 @@ def main(argv: Optional[List[str]] = None) -> None:
 
     if args.command == "export":
         handle_export(args)
+    elif args.command == "deploy-configs":
+        handle_deploy_configs(args)
     elif args.command == "convert":
         handle_convert(args)
     elif args.command == "frameworks":

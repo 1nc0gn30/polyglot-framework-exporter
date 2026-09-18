@@ -23,8 +23,10 @@ from .astro_generator import AstroGenerator
 from .bun_hono_generator import BunHonoGenerator
 from .deno_fresh_generator import DenoFreshGenerator
 from .electron_generator import ElectronGenerator
+from .htmx_generator import HTMXGenerator
 from .nextjs_generator import NextjsGenerator
 from .nuxt_generator import NuxtGenerator
+from .qwik_generator import QwikGenerator
 from .remix_generator import RemixGenerator
 from .solidstart_generator import SolidStartGenerator
 from .svelte_generator import SvelteGenerator
@@ -35,8 +37,10 @@ from .vite_react_generator import ViteReactGenerator
 GENERATORS: Dict[str, Any] = {
     "astro": AstroGenerator,
     "bun_hono": BunHonoGenerator,
+    "htmx": HTMXGenerator,
     "nextjs": NextjsGenerator,
     "vite_react": ViteReactGenerator,
+    "qwik": QwikGenerator,
     "svelte": SvelteGenerator,
     "solidstart": SolidStartGenerator,
     "nuxt": NuxtGenerator,
@@ -60,6 +64,9 @@ ALIASES: Dict[str, str] = {
     "react_router": "remix",
     "hono": "bun_hono",
     "bun": "bun_hono",
+    "qwikcity": "qwik",
+    "alpine_htmx": "htmx",
+    "hypermedia": "htmx",
 }
 
 

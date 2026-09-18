@@ -40,6 +40,16 @@ from .mcp_server import (
     validate_project_scaffold,
 )
 
+from .deploy_configs import (
+    generate_all_deploy_configs,
+    generate_dockerfile,
+    generate_dockerignore,
+    generate_github_actions_workflow,
+    generate_netlify_toml,
+    generate_vercel_json,
+    generate_wrangler_config,
+)
+
 from .cli import main
 
 
@@ -155,6 +165,13 @@ __all__ = [
     "inspect_zip",
     "validate_project_scaffold",
     "get_system_diagnostics",
+    "generate_all_deploy_configs",
+    "generate_dockerfile",
+    "generate_dockerignore",
+    "generate_netlify_toml",
+    "generate_vercel_json",
+    "generate_wrangler_config",
+    "generate_github_actions_workflow",
     "ZipBundler",
     "MCPServer",
     "run_mcp_server",

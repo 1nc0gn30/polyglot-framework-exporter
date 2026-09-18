@@ -160,3 +160,27 @@ class TestLiveUIServerAPIs:
         with pytest.raises(urllib.error.HTTPError) as exc_info:
             urllib.request.urlopen(url)
         assert exc_info.value.code == 404
+
+    def test_api_deploy_configs_get(self, live_ui_server: str) -> None:
+        url = f"{live_ui_server}/api/deploy-configs/nextjs"
+        with urllib.request.urlopen(url) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["success"] is True
+            assert data["framework"] == "nextjs"
+            assert "Dockerfile" in data["configs"]
+            assert "netlify.toml" in data["configs"]
+            assert "vercel.json" in data["configs"]
+
+    def test_api_deploy_configs_post(self, live_ui_server: str) -> None:
+        url = f"{live_ui_server}/api/deploy-configs"
+        payload = json.dumps({"framework": "qwik", "project_name": "qwik-app"}).encode("utf-8")
+        req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["success"] is True
+            assert data["framework"] == "qwik"
+            assert "Dockerfile" in data["configs"]
+            assert "wrangler.jsonc" in data["configs"]
+

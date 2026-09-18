@@ -176,6 +176,18 @@ FRAMEWORK_CATALOG: Dict[str, Dict[str, Any]] = {
         "features": ["Full-stack Loaders/Actions", "Vite plugin", "Progressive Enhancement"],
         "description": "Remix fullstack web framework with Vite integration and Material 3 color system.",
     },
+    "htmx": {
+        "id": "htmx",
+        "name": "HTMX 2.0 + Alpine.js",
+        "category": "web",
+        "version": "2.0.4",
+        "template": "htmx-alpine-tailwind",
+        "language": "HTML / Python",
+        "primary_extension": ".html",
+        "styling": ["Tailwind CSS", "M3 Design Tokens"],
+        "features": ["HTMX 2.0 Hypermedia", "Alpine.js Client Reactivity", "Pure Python Server", "Zero Build Overhead"],
+        "description": "Ultra-lightweight hypermedia web application powered by HTMX 2, Alpine.js, and pure Python server.",
+    },
     "vanilla": {
         "id": "vanilla",
         "name": "Vanilla Modern ES / Web Components",
@@ -892,6 +904,8 @@ def generate_project_scaffold(
         from .generators.nuxt_generator import NuxtGenerator
         from .generators.bun_hono_generator import BunHonoGenerator
         from .generators.solidstart_generator import SolidStartGenerator
+        from .generators.qwik_generator import QwikGenerator
+        from .generators.htmx_generator import HTMXGenerator
 
         gen_classes: Dict[str, Any] = {
             "react": ViteReactGenerator,
@@ -908,11 +922,26 @@ def generate_project_scaffold(
             "bun": BunHonoGenerator,
             "vue": NuxtGenerator,
             "nuxt": NuxtGenerator,
+            "qwik": QwikGenerator,
+            "qwikcity": QwikGenerator,
+            "htmx": HTMXGenerator,
+            "alpine_htmx": HTMXGenerator,
         }
         if norm_fw in gen_classes:
             ast = ProjectAST(title=project_name, theme=theme)
             res = gen_classes[norm_fw]().generate(ast=ast, options=options)
             if isinstance(res, dict) and len(res) > 0:
+                if "project.manifest.json" not in res:
+                    theme_data = THEME_PRESETS.get(theme, THEME_PRESETS["system"])
+                    manifest = {
+                        "project_name": project_name,
+                        "framework": norm_fw,
+                        "theme": theme,
+                        "theme_tokens": theme_data,
+                        "file_count": len(res) + 1,
+                        "generator_version": "0.1.0",
+                    }
+                    res["project.manifest.json"] = json.dumps(manifest, indent=2)
                 return res
     except Exception as e:
         logger.debug(f"Generator classes dispatch notice: {e}")
@@ -1729,6 +1758,28 @@ class MCPServer:
             handler=self._handle_diagnostics,
         )
 
+        # Tool 6: exporter_deploy_configs
+        self.register_tool(
+            name="exporter_deploy_configs",
+            description="Generate production deployment configurations (Dockerfile, .dockerignore, netlify.toml, vercel.json, wrangler.jsonc, deploy.yml) for a target framework.",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "framework": {
+                        "type": "string",
+                        "description": "Target framework identifier (e.g. nextjs, astro, vite_react, svelte, qwik, htmx, bun_hono, nuxt).",
+                    },
+                    "project_name": {
+                        "type": "string",
+                        "description": "Optional project/package name (default: 'app').",
+                        "default": "app",
+                    },
+                },
+                "required": ["framework"],
+            },
+            handler=self._handle_deploy_configs,
+        )
+
     def _register_default_resources(self) -> None:
         self._resources["polyglot://frameworks"] = {
             "uri": "polyglot://frameworks",
@@ -1868,6 +1919,19 @@ class MCPServer:
     def _handle_diagnostics(self, args: Dict[str, Any]) -> Dict[str, Any]:
         verbose = args.get("verbose", False)
         return get_system_diagnostics(verbose)
+
+    def _handle_deploy_configs(self, args: Dict[str, Any]) -> Dict[str, Any]:
+        from .deploy_configs import generate_all_deploy_configs
+        framework = args.get("framework", "vite_react")
+        project_name = args.get("project_name", "app")
+        configs = generate_all_deploy_configs(framework)
+        return {
+            "framework": framework,
+            "project_name": project_name,
+            "configs": configs,
+            "manifest_count": len(configs),
+            "manifests": list(configs.keys()),
+        }
 
     # -----------------------------------------------------------------------
     # JSON-RPC 2.0 Dispatch & Protocol Engine
