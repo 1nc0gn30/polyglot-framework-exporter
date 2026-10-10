@@ -2,9 +2,11 @@
 
 > **Universal Zero-Dependency Multi-Framework Scaffolder, AST Component Transpiler, Material 3 Web Studio & Model Context Protocol (MCP) Server for Modern Web & Desktop Frameworks.**
 
+[![Live App](https://img.shields.io/badge/Live%20App-polyglot.nullai.tech-00f0ff.svg)](https://polyglot.nullai.tech)
 [![CI](https://github.com/polyglot-framework/polyglot-framework-exporter/actions/workflows/ci.yml/badge.svg)](https://github.com/polyglot-framework/polyglot-framework-exporter/actions)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://python.org)
 [![Zero Dependencies](https://img.shields.io/badge/runtime%20dependencies-0%20(pure%20stdlib)-success.svg)](pyproject.toml)
+[![Client Side PKZIP](https://img.shields.io/badge/in--browser%20bundler-100%25%20client--side-00f0ff.svg)](public/index.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Frameworks](https://img.shields.io/badge/frameworks-13%20supported-orange.svg)](#-supported-frameworks-matrix)
 [![Themes](https://img.shields.io/badge/themes-6%20master%20presets-purple.svg)](#-master-theme-system)
@@ -249,6 +251,22 @@ pytest --cov=polyglot_framework_exporter --cov-report=term-missing -v
 
 ---
 
-## 📄 License
+## 💎 Sovereign Architecture & Dual Monetization Rails
+
+Polyglot Framework Exporter functions as a **100% Client-Side In-Browser Sovereign SaaS Application** deployable to Netlify, Vercel, or GitHub Pages with zero backend server dependencies:
+
+- **100% In-Browser Execution**: All scaffolding, AST transpilation, and ZIP compression run directly in the user's browser using a custom pure JavaScript zero-dependency PKZIP store compressor.
+- **Dual Monetization Rails**:
+  - **Stripe Checkout**: Credit cards, Apple Pay, Google Pay ($19 founding lifetime vs $79 regular).
+  - **DePay Solana**: Instant Web3 settlement via USDC/SOL.
+- **Action Interceptors & Frosted Blur Paywalls**: Live code exports and zip bundles are protected by frosted glass paywall blurs with instant client-side unlock (`?licensed=true`).
+- **Verified Triple-Viewport Responsiveness**: Automated headless Playwright testing across Mobile (390px), Tablet (820px), and Desktop (1425px) with 0 console errors and 0px horizontal overflow.
+
+---
+
+## 📄 License & Attribution
 
 This project is open source and available under the [MIT License](LICENSE).
+
+**Engineered by [Neal Frazier Tech](https://nealfrazier.tech) ([@1nc0gn30](https://github.com/1nc0gn30)) • [NullAI Platform](https://nullai.tech)**
+
