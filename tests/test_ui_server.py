@@ -153,7 +153,7 @@ class TestLiveUIServerAPIs:
         req = urllib.request.Request(url, method="OPTIONS")
         with urllib.request.urlopen(req) as resp:
             assert resp.status == 204
-            assert resp.headers.get("Access-Control-Allow-Origin") == "*"
+            assert resp.headers.get("Access-Control-Allow-Origin") == "http://127.0.0.1"
 
     def test_api_404_not_found(self, live_ui_server: str) -> None:
         url = f"{live_ui_server}/api/non_existent_endpoint"

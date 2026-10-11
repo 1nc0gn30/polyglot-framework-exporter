@@ -378,9 +378,9 @@ class HTMXHypermediaHandler(http.server.SimpleHTTPRequestHandler):
 
 
 def run_server(port: int = PORT) -> None:
-    print(f"🚀 Starting HTMX Hypermedia Server on http://0.0.0.0:{{port}}")
+    print(f"🚀 Starting HTMX Hypermedia Server on http://127.0.0.1:{{port}}")
     print("Zero runtime dependencies - 100% Python Standard Library.")
-    with socketserver.ThreadingTCPServer(("0.0.0.0", port), HTMXHypermediaHandler) as httpd:
+    with socketserver.ThreadingTCPServer(("127.0.0.1", port), HTMXHypermediaHandler) as httpd:
         httpd.allow_reuse_address = True
         try:
             httpd.serve_forever()

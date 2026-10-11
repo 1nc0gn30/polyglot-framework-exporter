@@ -433,6 +433,10 @@ class FrameworkStudioHandler(http.server.SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self) -> None:
+        from .ui_server import _is_local_origin
+        if not _is_local_origin(self.headers.get("Origin")):
+            self.send_error(403, "Cross-origin request blocked")
+            return
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
 
