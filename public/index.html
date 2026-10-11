@@ -6,20 +6,23 @@
   <title>Polyglot Studio | Universal Multi-Framework Scaffolder & Component Transpiler</title>
   <meta name="description" content="100% in-browser multi-framework project scaffolder, AST component transpiler, and in-memory ZIP bundler across 13 modern web and desktop frameworks." />
   <meta name="author" content="Neal Frazier (@1nc0gn30) • Neal Frazier Tech" />
-  <link rel="icon" type="image/png" href="favicon.ico" />
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon.png">
+  <link rel="apple-touch-icon" href="/assets/icon.png">
 
   <!-- OpenGraph / Social Meta Tags -->
   <meta property="og:title" content="Polyglot Studio | Universal Multi-Framework Scaffolder & Transpiler" />
   <meta property="og:description" content="100% in-browser project scaffolding across 13 modern frameworks (Astro, Next.js, Vite React, SvelteKit, Nuxt, Tauri, Electron). In-memory ZIP downloads and zero server dependencies." />
   <meta property="og:url" content="https://polyglot.nullai.tech" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://polyglot.nullai.tech/icon.png" />
+  <meta property="og:image" content="https://polyglot.nullai.tech/assets/banner.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@1nc0gn30" />
   <meta name="twitter:creator" content="@1nc0gn30" />
   <meta name="twitter:title" content="Polyglot Studio | Universal Multi-Framework Scaffolder" />
   <meta name="twitter:description" content="100% in-browser project scaffolding across 13 modern frameworks with in-memory ZIP downloads and component transpilation." />
-  <meta name="twitter:image" content="https://polyglot.nullai.tech/icon.png" />
+  <meta name="twitter:image" content="https://polyglot.nullai.tech/assets/banner.png" />
 
   <!-- Schema.org JSON-LD AEO/SEO Graph -->
   <script type="application/ld+json">
@@ -1061,11 +1064,11 @@
   <!-- App Header -->
   <header class="app-bar">
     <div class="brand-section">
-      <div class="brand-logo">P</div>
+      <img src="/assets/icon.png" alt="Polyglot Studio Logo" class="brand-icon" style="width:36px;height:36px;border-radius:8px;object-fit:cover;box-shadow:0 0 10px rgba(0,216,255,0.4);margin-right:10px;">
       <div>
         <div class="brand-title">
           Polyglot Studio
-          <span id="header-pro-badge" class="badge-pill">v2.0 • 100% Client-Side</span>
+          <span id="licenseBadge" class="badge-pill">⚡ FREE TIER</span>
         </div>
       </div>
     </div>
@@ -1440,7 +1443,7 @@
       function activateProState() {
         isProLicensed = true;
         localStorage.setItem('polyglot_pro_licensed', 'true');
-        const badge = document.getElementById('header-pro-badge');
+        const badge = document.getElementById('licenseBadge') || document.getElementById('header-pro-badge');
         if (badge) {
           badge.textContent = '⭐ PRO ACTIVE';
           badge.classList.add('pro-active');
@@ -1449,6 +1452,8 @@
         if (overlay) overlay.classList.remove('visible');
         const codeView = document.getElementById('code-display');
         if (codeView) codeView.classList.remove('locked');
+        const banner = document.querySelector('.sovereign-sales-banner');
+        if (banner) banner.style.display = 'none';
       }
 
       // ==========================================
@@ -1661,7 +1666,7 @@ const { title } = Astro.props;
               devDependencies: { vite: "^6.0.0", "@vitejs/plugin-react": "^4.3.0", typescript: "^5.6.0" }
             }, null, 2);
             files["vite.config.ts"] = `import { defineConfig } from 'vite';\nimport react from '@vitejs/plugin-react';\nexport default defineConfig({ plugins: [react()] });\n`;
-            files["index.html"] = `<!DOCTYPE html>\n<html>\n<head><meta charset="UTF-8" /><title>${title}</title></head>\n<body><div id="root"></div><script type="module" src="/src/main.tsx"><\/script></body>\n</html>\n`;
+            files["index.html"] = `<!DOCTYPE html>\n<html>\n<head><meta charset="UTF-8" /><title>${title}</title></head>\n<body><div id="root"></div>\\x3cscript type="module" src="/src/main.tsx">\\x3c/script></body>\n</html>\n`;
             files["src/main.tsx"] = `import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\nReactDOM.createRoot(document.getElementById('root')!).render(<App />);\n`;
             files["src/App.tsx"] = `export default function App() {\n  return (\n    <div className="min-h-screen p-8 bg-[#08080B] text-[#EDEFF2]">\n      <h1 className="text-4xl font-bold text-[#D4AF37]">${title}</h1>\n      <p className="mt-2 text-gray-400">${desc}</p>\n    </div>\n  );\n}\n`;
             break;
