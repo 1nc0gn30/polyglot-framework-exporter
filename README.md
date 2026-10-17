@@ -1,5 +1,9 @@
 # 🚀 Polyglot Framework Exporter
 
+> ⚡ **Live Web Application**: [https://polyglot-framework-exporter.netlify.app](https://polyglot-framework-exporter.netlify.app)  
+> 💳 **Unlock Pro Lifetime License ($19 One-Time, $0/mo)**: **[Instant Pro Unlock via Stripe](https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L)** *(Use promo code `FOUNDER25` for 25% off)*  
+> 🏆 **All-Access Sovereign Pro Bundle (All 44 Tools — $49 Lifetime)**: **[Get All 44 Studios via Stripe](https://buy.stripe.com/eVq14m5k16hW4Le0xWfw40M)**
+
 > **Universal Zero-Dependency Multi-Framework Scaffolder, AST Component Transpiler, Material 3 Web Studio & Model Context Protocol (MCP) Server for Modern Web & Desktop Frameworks.**
 
 [![Live App](https://img.shields.io/badge/Live%20App-polyglot.nullai.tech-00f0ff.svg)](https://polyglot.nullai.tech)
