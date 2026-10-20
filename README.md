@@ -1,12 +1,16 @@
 # 🚀 Polyglot Framework Exporter
 
 > ⚡ **Live Web Application**: [https://polyglot-framework-exporter.netlify.app](https://polyglot-framework-exporter.netlify.app)  
+> 💻 **Zoth Studio Enclave**: [https://zoth.nullai.tech/tools/polyglot-framework-exporter](https://zoth.nullai.tech/tools/polyglot-framework-exporter)  
 > 💳 **Unlock Pro Lifetime License ($19 One-Time, $0/mo)**: **[Instant Pro Unlock via Stripe](https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L)** *(Use promo code `FOUNDER25` for 25% off)*  
-> 🏆 **All-Access Sovereign Pro Bundle (All 44 Tools — $49 Lifetime)**: **[Get All 44 Studios via Stripe](https://buy.stripe.com/eVq14m5k16hW4Le0xWfw40M)**
+> ⚡ **Web3 Solana DePay**: Receiver `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`  
+> 🏆 **All-Access Sovereign Pro Bundle (All 44 Tools — $49 Lifetime)**: **[Get All 44 Studios via Stripe](https://buy.stripe.com/eVq14m5k16hW4Le0xWfw40M)**  
+> ⚡ **Attribution**: Engineered by Neal Frazier Tech ([@1nc0gn30](https://github.com/1nc0gn30)) • NullAI Platform.
 
 > **Universal Zero-Dependency Multi-Framework Scaffolder, AST Component Transpiler, Material 3 Web Studio & Model Context Protocol (MCP) Server for Modern Web & Desktop Frameworks.**
 
 [![Live App](https://img.shields.io/badge/Live%20App-polyglot.nullai.tech-00f0ff.svg)](https://polyglot.nullai.tech)
+[![Zoth Studio Ready](https://img.shields.io/badge/Zoth%20Studio-God%20Mode%20Active-D4AF37?style=flat)](https://zoth.nullai.tech/tools/polyglot-framework-exporter)
 [![CI](https://github.com/polyglot-framework/polyglot-framework-exporter/actions/workflows/ci.yml/badge.svg)](https://github.com/polyglot-framework/polyglot-framework-exporter/actions)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://python.org)
 [![Zero Dependencies](https://img.shields.io/badge/runtime%20dependencies-0%20(pure%20stdlib)-success.svg)](pyproject.toml)
