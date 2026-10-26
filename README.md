@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="assets/hero-banner.svg" alt="Polyglot Framework Exporter — Sovereign Architecture Banner" width="100%" />
+</div>
+
+<br />
+
 # 🚀 Polyglot Framework Exporter
 
 > ⚡ **Live Web Application**: [https://polyglot-framework-exporter.netlify.app](https://polyglot-framework-exporter.netlify.app)  
