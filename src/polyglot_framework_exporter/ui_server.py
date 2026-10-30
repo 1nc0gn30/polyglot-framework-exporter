@@ -290,7 +290,7 @@ class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
         path = parsed_url.path.rstrip("/") or "/"
         query = urllib.parse.parse_qs(parsed_url.query)
 
-        if path == "/api/health":
+        if path in ("/health", "/api/health"):
             self.handle_api_health()
         elif path == "/api/frameworks":
             self.handle_api_frameworks()

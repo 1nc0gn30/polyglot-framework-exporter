@@ -8,14 +8,17 @@
 
 > ⚡ **Live Web Application**: [https://polyglot-framework-exporter.netlify.app](https://polyglot-framework-exporter.netlify.app)  
 > 💻 **Zoth Studio Enclave**: [https://zoth.nullai.tech/tools/polyglot-framework-exporter](https://zoth.nullai.tech/tools/polyglot-framework-exporter)  
-> 💳 **Unlock Pro Lifetime License ($19 One-Time, $0/mo)**: **[Instant Pro Unlock via Stripe](https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L)** *(Use promo code `FOUNDER25` for 25% off)*  
-> ⚡ **Web3 Solana DePay**: Receiver `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`  
-> 🏆 **All-Access Sovereign Pro Bundle (All 44 Tools — $49 Lifetime)**: **[Get All 44 Studios via Stripe](https://buy.stripe.com/eVq14m5k16hW4Le0xWfw40M)**  
+> ☕ **Buy Us a Coffee**: **[Support via Stripe](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)**  
+> ⚡ **Web3 Solana Tip**: Receiver `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`  
+> 🔓 **100% Free & Open Access**: Zero paywalls, zero license keys, zero feature gating.  
 > ⚡ **Attribution**: Engineered by Neal Frazier Tech ([@1nc0gn30](https://github.com/1nc0gn30)) • NullAI Platform.
 
 > **Universal Zero-Dependency Multi-Framework Scaffolder, AST Component Transpiler, Material 3 Web Studio & Model Context Protocol (MCP) Server for Modern Web & Desktop Frameworks.**
 
 [![Live App](https://img.shields.io/badge/Live%20App-polyglot.nullai.tech-00f0ff.svg)](https://polyglot.nullai.tech)
+[![Buy Us a Coffee](https://img.shields.io/badge/☕%20Buy%20Us%20a%20Coffee-Stripe-D4AF37?style=flat)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
+[![Solana Tip](https://img.shields.io/badge/Solana%20Tip-GG2e...dXoK-14F195?style=flat)](https://solana.fm/address/GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK)
+[![100% Free & Unlocked](https://img.shields.io/badge/Access-100%25%20Free%20%26%20Unlocked-00FF9D?style=flat)](https://polyglot.nullai.tech)
 [![Zoth Studio Ready](https://img.shields.io/badge/Zoth%20Studio-God%20Mode%20Active-D4AF37?style=flat)](https://zoth.nullai.tech/tools/polyglot-framework-exporter)
 [![CI](https://github.com/polyglot-framework/polyglot-framework-exporter/actions/workflows/ci.yml/badge.svg)](https://github.com/polyglot-framework/polyglot-framework-exporter/actions)
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://python.org)
@@ -265,16 +268,37 @@ pytest --cov=polyglot_framework_exporter --cov-report=term-missing -v
 
 ---
 
-## 💎 Sovereign Architecture & Dual Monetization Rails
+## ☕ 100% Free & Open-Access (Buy Us a Coffee Support Architecture)
 
-Polyglot Framework Exporter functions as a **100% Client-Side In-Browser Sovereign SaaS Application** deployable to Netlify, Vercel, or GitHub Pages with zero backend server dependencies:
+Polyglot Framework Exporter and Polyglot Studio are **100% free, open, and unlocked by default**. Zero paywalls, zero license keys, and zero locked features.
 
-- **100% In-Browser Execution**: All scaffolding, AST transpilation, and ZIP compression run directly in the user's browser using a custom pure JavaScript zero-dependency PKZIP store compressor.
-- **Dual Monetization Rails**:
-  - **Stripe Checkout**: Credit cards, Apple Pay, Google Pay ($19 founding lifetime vs $79 regular).
-  - **DePay Solana**: Instant Web3 settlement via USDC/SOL.
-- **Action Interceptors & Frosted Blur Paywalls**: Live code exports and zip bundles are protected by frosted glass paywall blurs with instant client-side unlock (`?licensed=true`).
-- **Verified Triple-Viewport Responsiveness**: Automated headless Playwright testing across Mobile (390px), Tablet (820px), and Desktop (1425px) with 0 console errors and 0px horizontal overflow.
+If this project powers your workflows or saves you engineering hours, consider supporting its independent research:
+
+- **Stripe "Buy Us a Coffee"**: [Support via Stripe](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X) (Cards, Apple Pay, Google Pay)
+- **Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
+- **Sovereign Invariants**: 13-framework scaffolding, in-memory zero-dependency PKZIP bundling, cross-framework AST transpilation, and 100% client-side zero-egress execution.
+
+---
+
+## 💻 ZothOS CLI & MCP Integration
+
+```bash
+# Verify installation & deterministic JSON telemetry
+polyglot-framework-exporter --json
+polyglot-framework-exporter --version
+
+# Scaffold a project for any of the 13 frameworks
+polyglot-framework-exporter export --framework astro --name my-app --out ./my-app
+
+# Generate production deployment configurations
+polyglot-framework-exporter deploy-configs --framework nextjs
+
+# Transpile component code across frameworks
+polyglot-framework-exporter convert --source react --target svelte --input ./Component.jsx
+
+# Launch MCP Server for Claude Desktop & Cursor
+polyglot-framework-exporter mcp
+```
 
 ---
 

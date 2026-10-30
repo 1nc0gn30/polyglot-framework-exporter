@@ -43,7 +43,7 @@
         },
         "offers": {
           "@type": "Offer",
-          "price": "19.00",
+          "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
           "seller": {
@@ -76,7 +76,7 @@
             "name": "What payment rails are accepted for founding lifetime licenses?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "We accept instant payments via universal credit cards, Apple Pay, and Google Pay through Stripe ($19 lifetime), as well as decentralized Web3 on-chain payments via DePay on Solana."
+              "text": "We accept instant payments via universal credit cards, Apple Pay, and Google Pay through Stripe (Free (100% Open Access)), as well as decentralized Web3 on-chain payments via DePay on Solana."
             }
           }
         ]
@@ -139,6 +139,12 @@
       padding: 0;
     }
 
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+      width: 100% !important;
+    }
+
     body {
       font-family: var(--font-body);
       background-color: var(--surface-bg);
@@ -146,7 +152,6 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -713,7 +718,7 @@
     }
 
     .code-viewer.locked {
-      filter: blur(6px);
+      filter: none;
       user-select: none;
       pointer-events: none;
     }
@@ -728,7 +733,7 @@
       align-items: center;
       justify-content: center;
       background: rgba(8, 8, 11, 0.75);
-      backdrop-filter: blur(4px);
+      backdrop-filter: none;
       z-index: 10;
     }
 
@@ -817,7 +822,7 @@
       right: 0;
       bottom: 0;
       background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(6px);
+      backdrop-filter: none;
       z-index: 250;
       display: none;
       align-items: center;
@@ -1035,31 +1040,50 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="wave.css">
+  <link rel="stylesheet" href="wave-states.css">
+  <link rel="stylesheet" href="wave-type.css">
+
+  <!-- Zoth 100% Open-Access & Buy Us a Coffee Invariant -->
+  <script id="zoth-open-access-init">
+    (function() {
+      try {
+        var keys = ['agent_audiocipher_pro', 'agent_cyber_turtle_pro', 'agent_datamosh_pro', 'agent_nexus3d_pro', 'agent_policy_pro', 'audiocipher_license', 'audiocipher_pro_licensed', 'badge3d_pro_licensed', 'certpath_pro_key', 'certpath_pro_licensed', 'cron_rhythm_pro_key', 'cron_rhythm_pro_licensed', 'cwv-speed-engine_pro_licensed', 'cwv_pro_licensed', 'cyber_turtle_pro_licensed', 'datamosh_pro_licensed', 'deepsearch-research-agent_pro_licensed', 'deepsearch_pro_licensed', 'entropy_studio_licensed', 'envguard-secrets-vault_pro_licensed', 'envguard_pro_license', 'etsy_connector_pro', 'jwt_guard_licensed', 'mdg_pro_licensed', 'neuro_pro_licensed', 'nexus3d_pro_licensed', 'omnipost_pro_key', 'omnipost_pro_licensed', 'osint_pro_licensed', 'payload-entropy-studio_pro_licensed', 'polyglot_pro_licensed', 'pro_licensed', 'promptmaster_pro_licensed', 'promptmaster_pro_active', 'robots-txt-auditor_pro_licensed', 'robots_pro_licensed', 'schema_illustrator_pro_licensed', 'sovereign_pro_licensed', 'subsweep-lead-scanner_pro_licensed', 'subsweep_licensed', 'turtle_pro_licensed', 'ufo_sacred_licensed', 'vector-search-engine_pro_licensed', 'vector_studio_pro_licensed', 'web-security-guard_pro_licensed', 'web_security_guard_licensed', 'yourdigitalspace_pro', 'zela_guide_pro_licensed', 'zoth_ascii_magic_pro', 'zoth_audiocipher_licensed', 'zoth_badge3d_licensed', 'zoth_cyber_turtle_licensed', 'zoth_datamosh_licensed', 'zoth_etsy_licensed', 'zoth_nexus3d_licensed', 'zoth_osint_licensed', 'zoth_policy_licensed', 'zoth_sacred_licensed', 'zoth_ufo_licensed'];
+        for (var i = 0; i < keys.length; i++) {
+          localStorage.setItem(keys[i], 'true');
+        }
+        localStorage.setItem('pm_license_v2', JSON.stringify({ method: 'open_access', ref: 'free_forever', at: '2026-01-01T00:00:00Z' }));
+        window.isPro = true;
+        window.isProLicensed = true;
+      } catch (e) {}
+    })();
+  </script>
+  <style id="zoth-open-access-override">
+    .paywall-overlay, .output-paywall-overlay, #outputPaywallOverlay, #schemaPaywallOverlay,
+    #transformerPaywallOverlay, #proPaywallModal, #licenseModal, #salesBanner, #founding-offer-banner,
+    #funnelHeroBanner, [data-alias="paywallOverlay"], [data-alias="founding-offer-banner"] {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    .paywall-wrap #outputPreview, .paywall-wrap #reportContentArea, .paywall-content,
+    .paywall-content.locked, .paywall-wrap.is-locked #outputPreview, .paywall-wrap.locked #outputPreview {
+      filter: none !important;
+      -webkit-filter: none !important;
+      user-select: auto !important;
+      pointer-events: auto !important;
+    }
+  </style>
+
 </head>
 <body>
 
-  <!-- Above-The-Fold Glassmorphic Sales Funnel Banner -->
-  <div class="sovereign-sales-banner">
-    <div class="banner-inner">
-      <div class="banner-badge">★ FOUNDING COHORT</div>
-      <div class="banner-content">
-        <strong>Pro Lifetime Access:</strong> Unrestricted multi-framework scaffolding (13 web & desktop frameworks), unlimited in-memory ZIP exports, and AST component transpilation.
-        <span class="banner-price"><del>$79</del> <strong>$19</strong> lifetime</span>
-      </div>
-      <div class="banner-actions">
-        <a href="https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L" target="_blank" rel="noopener" class="banner-btn stripe-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-          Instant Pro ($19)
-        </a>
-        <button id="btn-banner-solana" class="banner-btn solana-btn">
-          ◎ Pay with Solana
-        </button>
-        <button id="btn-banner-activate" class="banner-link-btn">
-          Activate License
-        </button>
-      </div>
-    </div>
-  </div>
+<div id="zoth-coffee-support-bar" style="background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(212,175,55,0.14)); border-bottom: 1px solid rgba(212,175,55,0.35); padding: 8px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; z-index: 9999;">
+  <span style="color: #10B981; font-weight: 800;">✦ 100% FREE &amp; OPEN ACCESS · ZERO PAYWALLS</span>
+  <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener noreferrer" style="background: #D4AF37; color: #08080B; padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">☕ Buy Us a Coffee (Stripe)</a>
+  <a href="solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK" onclick="if(navigator.clipboard){navigator.clipboard.writeText('GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');this.textContent='✓ Copied GG2eQb...dXoK!';}" style="background: rgba(20,241,149,0.15); color: #14F195; border: 1px solid rgba(20,241,149,0.45); padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">◎ Solana Tip (GG2e...dXoK)</a>
+</div>
+
 
   <!-- App Header -->
   <header class="app-bar">
@@ -1068,7 +1092,7 @@
       <div>
         <div class="brand-title">
           Polyglot Studio
-          <span id="licenseBadge" class="badge-pill">⚡ FREE TIER</span>
+          <span id="licenseBadge" class="badge-pill" style="background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4);">✦ 100% UNLOCKED</span>
         </div>
       </div>
     </div>
@@ -1197,33 +1221,8 @@
             </div>
           </div>
           
-          <div class="code-paywall-wrap" id="codePaywallWrap">
-            <div id="code-display" class="code-viewer locked">// Select a file to inspect</div>
-            
-            <!-- Paywall Lock Overlay -->
-            <div class="paywall-lock-overlay visible" id="paywallOverlay">
-              <div class="paywall-lock-card">
-                <div style="font-size: 24px; margin-bottom: 8px;">★</div>
-                <h3>Pro Exporter Paywall</h3>
-                <p>Unlock complete full-stack project scaffolding across 13 frameworks, zero-dependency ZIP bundling, and production deployment scripts.</p>
-                <div class="paywall-price-tag">
-                  <span class="old-price">$79</span>
-                  <span class="new-price">$19 Lifetime Access</span>
-                </div>
-                <div class="paywall-ctas">
-                  <a href="https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L" target="_blank" rel="noopener" class="btn btn-primary">
-                    ⚡ Unlock Pro ($19 Stripe)
-                  </a>
-                  <button class="btn btn-outline" id="btn-overlay-solana">
-                    ◎ Pay with Solana
-                  </button>
-                </div>
-                <div class="paywall-key-prompt">
-                  <input type="text" id="license-key-input" placeholder="Enter license key / receipt email" />
-                  <button id="btn-submit-license" class="btn btn-tonal">Activate</button>
-                </div>
-              </div>
-            </div>
+          <div>
+            <div id="code-display" class="code-viewer">// Select a file to inspect</div>
           </div>
 
         </div>
@@ -1320,78 +1319,19 @@
     </div>
   </main>
 
-  <!-- Pro Paywall Modal -->
-  <div id="pro-paywall-modal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div class="modal-title">⭐ Polyglot Studio Pro</div>
-        <button id="btn-close-paywall-modal" class="btn-icon">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="pro-benefits-grid">
-          <div class="benefit-item">
-            <span class="benefit-icon">▣</span>
-            <div>
-              <strong>13-Framework Production ZIPs</strong>
-              <p>Instant deterministic in-memory binary archives for Astro, Next.js, React, Tauri, and Electron.</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <span class="benefit-icon">❖</span>
-            <div>
-              <strong>100% In-Browser Privacy</strong>
-              <p>Zero cloud dependencies. Your source files, components, and designs never leave your local device.</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <span class="benefit-icon">↻</span>
-            <div>
-              <strong>Cross-Framework AST Transpiler</strong>
-              <p>Seamlessly convert React JSX/TSX to Astro, Svelte 5 Runes, Vue 3 Composition, and SolidJS.</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <span class="benefit-icon">★</span>
-            <div>
-              <strong>Ready-to-Deploy Configs</strong>
-              <p>Automated synthesis of Dockerfile, Netlify, Vercel, and GitHub Actions CI/CD workflows.</p>
-            </div>
-          </div>
-        </div>
-        <div class="paywall-pricing-banner">
-          <div>
-            <div class="pricing-label">Founding Member Special</div>
-            <div class="pricing-value"><del>$79</del> <strong>$19 USD</strong> / Lifetime</div>
-          </div>
-          <div class="pricing-actions">
-            <a href="https://buy.stripe.com/4gMfZg9AheOsdhKbcAfw40L" target="_blank" rel="noopener" class="btn btn-primary">
-              Checkout with Card ($19)
-            </a>
-            <button id="btn-modal-solana" class="btn btn-outline">
-              ◎ Solana Pay
-            </button>
-          </div>
-        </div>
-        <div class="key-activation-row">
-          <span>Already a member?</span>
-          <input type="text" id="modal-key-input" placeholder="Paste license key or email" />
-          <button id="btn-modal-activate" class="btn btn-tonal">Activate</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Toast Notification Container -->
   <div id="toast-container" class="toast-container"></div>
 
   <!-- Sovereign Professional Footer -->
-  <footer class="sovereign-footer">
-    <div class="footer-left">
-      <span class="brand-chip">Polyglot Studio</span>
-      <span>v2.0 • 100% In-Browser Sovereign Engine</span>
+  <footer class="sovereign-footer" style="padding: 1.5rem; text-align: center; border-top: 1px solid var(--border-color, rgba(255,255,255,0.1));">
+    <div style="margin-bottom: 0.4rem; font-weight: 700;">
+      Polyglot Studio • 100% In-Browser Sovereign Framework Scaffolder
     </div>
-    <div class="footer-right">
-      <span>Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30" target="_blank" rel="noopener">@1nc0gn30</a>) • <a href="https://nullai.tech" target="_blank" rel="noopener">NullAI Platform</a></span>
+    <div style="margin-bottom: 0.4rem; font-size: 0.85rem; opacity: 0.9;">
+      Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30" target="_blank" rel="noopener">@1nc0gn30</a>) • <a href="https://nullai.tech" target="_blank" rel="noopener">NullAI Platform</a>
+    </div>
+    <div style="font-size: 0.78rem; opacity: 0.8;">
+      100% Free & Open Access • <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener" style="color: #D4AF37;">☕ Buy Us a Coffee</a> • Solana: <code style="font-size: 0.75rem; color: #14F195;">GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK</code>
     </div>
   </footer>
 
@@ -1421,7 +1361,7 @@
       let selectedFramework = "astro";
       let currentGeneratedFiles = {};
       let activeFilePath = "";
-      let isProLicensed = false;
+      let isProLicensed = true;
 
       // Toast feedback helper
       function showToast(msg) {
@@ -1433,27 +1373,20 @@
         setTimeout(() => t.remove(), 2600);
       }
 
-      // Check license on load
-      const savedLicense = localStorage.getItem('polyglot_pro_licensed');
-      const urlParams = new URLSearchParams(window.location.search);
-      if (savedLicense === 'true' || urlParams.get('licensed') === 'true') {
-        activateProState();
-      }
+      // Sovereign 100% Free & Open Access
+      activateProState();
 
       function activateProState() {
         isProLicensed = true;
-        localStorage.setItem('polyglot_pro_licensed', 'true');
         const badge = document.getElementById('licenseBadge') || document.getElementById('header-pro-badge');
         if (badge) {
-          badge.textContent = '⭐ PRO ACTIVE';
-          badge.classList.add('pro-active');
+          badge.textContent = '✦ 100% UNLOCKED';
+          badge.style.background = 'rgba(16, 185, 129, 0.15)';
+          badge.style.color = '#10B981';
+          badge.style.borderColor = 'rgba(16, 185, 129, 0.4)';
         }
-        const overlay = document.getElementById('paywallOverlay');
-        if (overlay) overlay.classList.remove('visible');
         const codeView = document.getElementById('code-display');
         if (codeView) codeView.classList.remove('locked');
-        const banner = document.querySelector('.sovereign-sales-banner');
-        if (banner) banner.style.display = 'none';
       }
 
       // ==========================================
@@ -1847,27 +1780,13 @@ const { title } = Astro.props;
 
         nameDisplay.textContent = activeFilePath;
         codeDisplay.textContent = currentGeneratedFiles[activeFilePath];
-
-        if (isProLicensed) {
-          codeDisplay.classList.remove('locked');
-          document.getElementById('paywallOverlay').classList.remove('visible');
-        } else {
-          codeDisplay.classList.add('locked');
-          document.getElementById('paywallOverlay').classList.add('visible');
-        }
+        codeDisplay.classList.remove('locked');
       }
 
       // ==========================================
-      // ZIP DOWNLOAD & ACTION INTERCEPTORS
+      // ZIP DOWNLOAD & FILE COPY
       // ==========================================
-      const proPaywallModal = document.getElementById("pro-paywall-modal");
-
       function triggerZipDownload() {
-        if (!isProLicensed) {
-          proPaywallModal.classList.add("open");
-          return;
-        }
-
         const projectName = document.getElementById("input-project-name").value.trim() || "polyglot-app";
         const fileList = Object.keys(currentGeneratedFiles).map(name => ({
           name,
@@ -1888,65 +1807,12 @@ const { title } = Astro.props;
 
       document.getElementById("btn-download-zip").addEventListener("click", triggerZipDownload);
       document.getElementById("btn-copy-file").addEventListener("click", () => {
-        if (!isProLicensed) {
-          proPaywallModal.classList.add("open");
-          return;
-        }
         if (activeFilePath && currentGeneratedFiles[activeFilePath]) {
           navigator.clipboard.writeText(currentGeneratedFiles[activeFilePath]).then(() => {
             showToast(`Copied ${activeFilePath} to clipboard!`);
           });
         }
       });
-
-      // License Key Activations
-      function handleActivation(inputElem) {
-        const key = inputElem.value.trim();
-        if (key.length >= 3) {
-          activateProState();
-          proPaywallModal.classList.remove("open");
-          showToast("⭐ Pro License Activated!");
-          displayActiveFile();
-        } else {
-          showToast("Please enter a valid license key or receipt email.");
-        }
-      }
-
-      document.getElementById("btn-submit-license").addEventListener("click", () => {
-        handleActivation(document.getElementById("license-key-input"));
-      });
-      document.getElementById("btn-modal-activate").addEventListener("click", () => {
-        handleActivation(document.getElementById("modal-key-input"));
-      });
-      document.getElementById("btn-banner-activate").addEventListener("click", () => {
-        proPaywallModal.classList.add("open");
-      });
-      document.getElementById("btn-close-paywall-modal").addEventListener("click", () => {
-        proPaywallModal.classList.remove("open");
-      });
-      proPaywallModal.addEventListener("click", (e) => {
-        if (e.target === proPaywallModal) proPaywallModal.classList.remove("open");
-      });
-
-      // Solana DePay Checkout triggers
-      function triggerSolanaCheckout() {
-        const solanaAddress = "GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK";
-        navigator.clipboard.writeText(solanaAddress);
-        showToast("◎ Solana receiver copied! Send $19 equivalent to activate: " + solanaAddress.substring(0, 8) + "...");
-        setTimeout(() => {
-          const proceed = confirm("Solana Receiver copied: " + solanaAddress + "\\n\\nAfter initiating your 0.12 SOL transfer, click OK to instantly unlock Pro on this device.");
-          if (proceed) {
-            activateProState();
-            proPaywallModal.classList.remove("open");
-            showToast("⭐ Solana Transfer Verified — Pro Active!");
-            displayActiveFile();
-          }
-        }, 300);
-      }
-
-      document.getElementById("btn-banner-solana").addEventListener("click", triggerSolanaCheckout);
-      document.getElementById("btn-overlay-solana").addEventListener("click", triggerSolanaCheckout);
-      document.getElementById("btn-modal-solana").addEventListener("click", triggerSolanaCheckout);
 
       // Tab Navigation
       document.querySelectorAll(".tab-button").forEach(btn => {
