@@ -1,0 +1,323 @@
+/* ==========================================================================
+   Polyglot Studio — Wave States Layer (wave-states.css)
+   Interaction States: :focus-visible, hover, empty, error & reduced-motion
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. ACCESSIBLE KEYBOARD FOCUS (:focus-visible)
+   High-contrast 2px primary focus indicators with calibrated offset
+   -------------------------------------------------------------------------- */
+
+/* Form Controls Focus */
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible,
+#license-key-input:focus-visible,
+#modal-key-input:focus-visible,
+#transpile-input:focus-visible {
+  outline: 2px solid var(--primary, #D4AF37) !important;
+  outline-offset: 1px !important;
+  border-color: var(--primary, #D4AF37) !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.22) !important;
+}
+
+/* Button & Action Focus */
+.btn:focus-visible,
+.banner-btn:focus-visible,
+.banner-link-btn:focus-visible,
+.tab-button:focus-visible,
+.btn-icon:focus-visible {
+  outline: 2px solid var(--primary, #D4AF37) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25) !important;
+}
+
+/* Framework Cards & File Tree Focus */
+.framework-card:focus-visible,
+.file-tree-item:focus-visible {
+  outline: 2px solid var(--primary, #D4AF37) !important;
+  outline-offset: 2px !important;
+}
+
+/* Checkbox & Anchor Focus */
+.checkbox-label input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--primary, #D4AF37);
+  outline-offset: 2px;
+}
+
+.sovereign-footer a:focus-visible {
+  outline: 2px solid var(--primary, #D4AF37);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Suppress mouse-click focus ring without degrading keyboard accessibility */
+:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn:focus:not(:focus-visible),
+.banner-btn:focus:not(:focus-visible),
+.tab-button:focus:not(:focus-visible),
+.framework-card:focus:not(:focus-visible),
+.file-tree-item:focus:not(:focus-visible) {
+  outline: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. TACTILE HOVER & ACTIVE FEEDBACK
+   Subtle 120ms-160ms elevation, border luminosity and color shifts
+   -------------------------------------------------------------------------- */
+
+/* Primary & Action Buttons */
+.btn-primary:hover {
+  background: linear-gradient(135deg, #E5C358 0%, #C9971A 100%) !important;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(212, 175, 55, 0.2) !important;
+}
+
+.btn-tonal:hover {
+  background: rgba(212, 175, 55, 0.22) !important;
+  border-color: rgba(212, 175, 55, 0.5) !important;
+  color: #F5E6AB !important;
+  transform: translateY(-1px);
+}
+
+.btn-tonal:active {
+  transform: translateY(0) !important;
+}
+
+.btn-outline:hover {
+  background: var(--surface-hover, #1E1E2A) !important;
+  border-color: rgba(212, 175, 55, 0.45) !important;
+  color: var(--text-primary, #EDEFF2) !important;
+  transform: translateY(-1px);
+}
+
+.btn-outline:active {
+  transform: translateY(0) !important;
+}
+
+.btn-icon:hover {
+  background: var(--surface-hover, #1E1E2A);
+  color: var(--primary, #D4AF37);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.btn-icon:active {
+  transform: scale(0.96);
+}
+
+/* Sovereign Banner Actions */
+.stripe-btn:hover {
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4) !important;
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.stripe-btn:active {
+  transform: translateY(0);
+}
+
+.solana-btn:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: rgba(212, 175, 55, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+.solana-btn:active {
+  transform: translateY(0);
+}
+
+.banner-link-btn:hover {
+  color: #F5E6AB !important;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+/* Tab Navigation Hover */
+.tab-button:not(.active):hover {
+  color: var(--text-primary, #EDEFF2);
+  border-bottom-color: rgba(212, 175, 55, 0.4);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Framework Cards */
+.framework-card:hover {
+  border-color: rgba(212, 175, 55, 0.6) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 12px rgba(212, 175, 55, 0.12) !important;
+}
+
+.framework-card.selected:hover {
+  border-color: var(--primary, #D4AF37) !important;
+  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.24) !important;
+}
+
+/* File Tree Hover */
+.file-tree-item:hover {
+  background-color: var(--surface-hover, #1E1E2A) !important;
+  color: var(--text-primary, #EDEFF2) !important;
+}
+
+.file-tree-item.active:hover {
+  background-color: rgba(212, 175, 55, 0.22) !important;
+  color: #F5E6AB !important;
+}
+
+/* Tags, Chips & Benefit Items */
+.chip:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  color: var(--text-primary);
+}
+
+.tag:hover {
+  background: rgba(212, 175, 55, 0.14);
+  color: var(--primary);
+}
+
+.benefit-item {
+  transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.benefit-item:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+  transform: translateY(-1px);
+}
+
+.checkbox-label:hover {
+  color: var(--text-primary);
+}
+
+.sovereign-footer a:hover {
+  color: #F5E6AB;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   3. EMPTY STATE PRESENTATION (:empty & :placeholder-shown)
+   Polished, non-intrusive fallback messaging when containers lack children
+   -------------------------------------------------------------------------- */
+
+#transpile-output:empty::before {
+  content: "// Select target framework and click '⚡ Convert AST' or pick a sample snippet...";
+  color: var(--text-disabled, #5F6368);
+  font-style: italic;
+  display: block;
+  pointer-events: none;
+}
+
+#code-display:empty::before {
+  content: "// Select a file from the explorer tree to inspect source code...";
+  color: var(--text-disabled, #5F6368);
+  font-style: italic;
+  display: block;
+  pointer-events: none;
+}
+
+.file-tree-list:empty::before {
+  content: "No generated files. Choose a framework above.";
+  display: block;
+  padding: 1.25rem 0.5rem;
+  color: var(--text-disabled, #5F6368);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  text-align: center;
+  font-style: italic;
+}
+
+#frameworks-container:empty::before {
+  content: "Loading framework definitions...";
+  display: block;
+  grid-column: 1 / -1;
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary, #9AA0A6);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.85rem;
+}
+
+.toast-container:empty {
+  display: none;
+}
+
+/* Calibrated Placeholders */
+.form-input::placeholder,
+.form-textarea::placeholder,
+#modal-key-input::placeholder,
+#license-key-input::placeholder,
+#transpile-input::placeholder {
+  color: var(--text-disabled, #5F6368);
+  opacity: 0.8;
+  font-style: normal;
+}
+
+/* --------------------------------------------------------------------------
+   4. ERROR & VALIDATION PRESENTATION (:invalid)
+   Crisp semantic error cues with accessible contrast
+   -------------------------------------------------------------------------- */
+
+.form-input:invalid:not(:placeholder-shown),
+.form-textarea:invalid:not(:placeholder-shown) {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.04);
+}
+
+.form-input:invalid:not(:placeholder-shown):focus-visible,
+.form-textarea:invalid:not(:placeholder-shown):focus-visible {
+  outline-color: #ef4444 !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important;
+}
+
+#license-key-input:invalid:not(:placeholder-shown),
+#modal-key-input:invalid:not(:placeholder-shown) {
+  border-color: #ef4444 !important;
+}
+
+.form-input[aria-invalid="true"],
+.form-textarea[aria-invalid="true"] {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.04);
+}
+
+/* --------------------------------------------------------------------------
+   5. PREFERS-REDUCED-MOTION GUARANTEE
+   Nullifies all decorative movement and transitions for accessibility
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-tonal,
+  .btn-outline,
+  .btn-icon,
+  .banner-btn,
+  .stripe-btn,
+  .solana-btn,
+  .framework-card,
+  .file-tree-item,
+  .tab-button,
+  .benefit-item,
+  .modal-card,
+  .toast,
+  .code-viewer {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -50,7 +50,10 @@ from .deploy_configs import (
     generate_wrangler_config,
 )
 
-from .cli import main
+def main(argv: Optional[List[str]] = None) -> int:
+    """Entry point for the Polyglot Framework Exporter CLI."""
+    from .cli import main as _cli_main
+    return _cli_main(argv)
 
 
 # ---------------------------------------------------------------------------

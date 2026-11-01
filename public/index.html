@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Polyglot Studio | Universal Multi-Framework Scaffolder & Component Transpiler</title>
   <meta name="description" content="100% in-browser multi-framework project scaffolder, AST component transpiler, and in-memory ZIP bundler across 13 modern web and desktop frameworks." />
-  <meta name="author" content="Neal Frazier (@1nc0gn30) • Neal Frazier Tech" />
+  <meta name="author" content="1nc0gn30 (@1nc0gn30) • 1nc0gn30 • NullAI" />
   <!-- Favicon & Brand Icons -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon.png">
@@ -38,8 +38,8 @@
         "description": "100% in-browser multi-framework project scaffolder, AST component transpiler, and deterministic in-memory ZIP bundler for Astro, Next.js, React, SvelteKit, Nuxt, Tauri, and Electron.",
         "creator": {
           "@type": "Person",
-          "name": "Neal Frazier",
-          "url": "https://nealfrazier.tech"
+          "name": "1nc0gn30",
+          "url": "https://nullai.tech"
         },
         "offers": {
           "@type": "Offer",
@@ -48,7 +48,7 @@
           "availability": "https://schema.org/InStock",
           "seller": {
             "@type": "Organization",
-            "name": "Neal Frazier Tech"
+            "name": "1nc0gn30 • NullAI"
           }
         }
       },
@@ -73,10 +73,10 @@
           },
           {
             "@type": "Question",
-            "name": "What payment rails are accepted for founding lifetime licenses?",
+            "name": "Is Polyglot Studio free and open-access?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "We accept instant payments via universal credit cards, Apple Pay, and Google Pay through Stripe (Free (100% Open Access)), as well as decentralized Web3 on-chain payments via DePay on Solana."
+              "text": "Yes. Polyglot Studio is 100% free and open-access with zero paywalls. Optional community support is available via Stripe Buy Us a Coffee and Solana tips."
             }
           }
         ]
@@ -1020,18 +1020,24 @@
     }
 
     /* Responsive Media Queries */
+    .panel {
+      min-width: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     @media (max-width: 1000px) {
       .studio-workspace {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         height: auto;
       }
 
       .transpiler-sandbox {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
 
       .pro-benefits-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
 
       .banner-inner {
@@ -1328,7 +1334,7 @@
       Polyglot Studio • 100% In-Browser Sovereign Framework Scaffolder
     </div>
     <div style="margin-bottom: 0.4rem; font-size: 0.85rem; opacity: 0.9;">
-      Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30" target="_blank" rel="noopener">@1nc0gn30</a>) • <a href="https://nullai.tech" target="_blank" rel="noopener">NullAI Platform</a>
+      Engineered by 1nc0gn30 • NullAI (<a href="https://github.com/1nc0gn30" target="_blank" rel="noopener">@1nc0gn30</a>) • <a href="https://nullai.tech" target="_blank" rel="noopener">NullAI Platform</a>
     </div>
     <div style="font-size: 0.78rem; opacity: 0.8;">
       100% Free & Open Access • <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener" style="color: #D4AF37;">☕ Buy Us a Coffee</a> • Solana: <code style="font-size: 0.75rem; color: #14F195;">GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK</code>
@@ -1575,7 +1581,8 @@ const { title } = Astro.props;
   </head>
   <body>
     <slot />
-  </body>
+    <script src="/assets/sovereign-upgrade.js" defer></script>
+</body>
 </html>
 `;
             break;

@@ -1,0 +1,172 @@
+/* ==========================================================================
+   Polyglot Studio — Wave Surface Layer (wave.css)
+   Precision Scaffolder & Component Transpiler Tool Surface Enhancements
+   ========================================================================== */
+
+/* 1. Type Hierarchy & Calibrated Working Surface */
+.panel-title {
+  font-family: var(--font-display, 'Space Grotesk', -apple-system, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.form-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.82rem;
+  background: var(--code-bg, #0B0B12);
+  border: 1px solid var(--surface-border, #23232C);
+  border-radius: var(--radius-sm, 6px);
+  color: var(--text-primary, #EDEFF2);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.checkbox-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+}
+
+#file-count,
+#bundle-size-tag {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+#active-file-name {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.file-tree-item {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  letter-spacing: -0.01em;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.code-viewer {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+.framework-title {
+  font-family: var(--font-display, 'Space Grotesk', -apple-system, sans-serif);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.framework-tagline {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.framework-desc {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.framework-meta-row {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* 2. Accessible High-Contrast Visible Focus */
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible,
+#license-key-input:focus-visible,
+#modal-key-input:focus-visible {
+  outline: 2px solid var(--primary, #D4AF37);
+  outline-offset: 1px;
+  border-color: var(--primary, #D4AF37);
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.2);
+}
+
+.btn:focus-visible,
+.banner-btn:focus-visible,
+.banner-link-btn:focus-visible,
+.tab-button:focus-visible {
+  outline: 2px solid var(--primary, #D4AF37);
+  outline-offset: 2px;
+}
+
+.framework-card:focus-visible,
+.file-tree-item:focus-visible {
+  outline: 2px solid var(--primary, #D4AF37);
+  outline-offset: 1px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.btn:focus:not(:focus-visible),
+.tab-button:focus:not(:focus-visible),
+.banner-btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* 3. Result Reveal Motion (EASE_OUT_EXPO cubic-bezier(0.16, 1, 0.3, 1)) */
+@keyframes waveResultReveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.file-tree-item {
+  animation: waveResultReveal 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.file-tree-item:nth-child(1) { animation-delay: 15ms; }
+.file-tree-item:nth-child(2) { animation-delay: 30ms; }
+.file-tree-item:nth-child(3) { animation-delay: 45ms; }
+.file-tree-item:nth-child(4) { animation-delay: 60ms; }
+.file-tree-item:nth-child(5) { animation-delay: 75ms; }
+.file-tree-item:nth-child(6) { animation-delay: 90ms; }
+.file-tree-item:nth-child(7) { animation-delay: 105ms; }
+.file-tree-item:nth-child(8) { animation-delay: 120ms; }
+.file-tree-item:nth-child(n+9) { animation-delay: 135ms; }
+
+#transpile-output:not(:empty) {
+  animation: waveResultReveal 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 4. Motion Sensitivity / Accessibility Guarantee */
+@media (prefers-reduced-motion: reduce) {
+  .file-tree-item,
+  #transpile-output,
+  #transpile-output:not(:empty) {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
