@@ -872,10 +872,11 @@ def build_cli_parser() -> argparse.ArgumentParser:
     p_convert.add_argument("-o", "--output", help="Output file path.")
     p_convert.add_argument("--typescript", action="store_true", default=True, help="Generate TypeScript component.")
 
-    # Subcommand: frameworks
-    p_fw = subparsers.add_parser("frameworks", help="List all supported frameworks, versions, and capabilities.")
-    p_fw.add_argument("-c", "--category", help="Filter by category (spa, meta, native, static, web, all).")
-    p_fw.add_argument("--json", action="store_true", help="Output as JSON.")
+    # Subcommand: frameworks / list
+    for fw_alias in ("frameworks", "list"):
+        p_fw = subparsers.add_parser(fw_alias, help="List all supported frameworks, versions, and capabilities.")
+        p_fw.add_argument("-c", "--category", help="Filter by category (spa, meta, native, static, web, all).")
+        p_fw.add_argument("--json", action="store_true", help="Output as JSON.")
 
     # Subcommand: serve
     p_serve = subparsers.add_parser("serve", help="Launch the Polyglot Studio Web UI.")
@@ -919,7 +920,7 @@ def main(argv: Optional[List[str]] = None) -> None:
         handle_deploy_configs(args)
     elif args.command == "convert":
         handle_convert(args)
-    elif args.command == "frameworks":
+    elif args.command in ("frameworks", "list"):
         handle_frameworks(args)
     elif args.command == "serve":
         run_studio_server(host=args.host, port=args.port, open_browser=args.open)
