@@ -193,6 +193,7 @@ def atomic_write_text(
             mode="w",
             encoding=encoding,
             errors=errors,
+            newline="\n",
             dir=str(parent),
             prefix=prefix,
             delete=False,
