@@ -1084,6 +1084,7 @@ class ProjectAST:
   </footer>""")
 
         css_vars = theme_cfg.to_css_string()
+        body_html = "\n".join(body_sections)
         return f"""<!DOCTYPE html>
 <html lang="{html.escape(self.lang)}">
 <head>
@@ -1109,7 +1110,7 @@ class ProjectAST:
   </style>
 </head>
 <body>
-{"\n".join(body_sections)}
+{body_html}
 </body>
 </html>"""
 

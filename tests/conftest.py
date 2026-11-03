@@ -22,7 +22,7 @@ from polyglot_framework_exporter.ui_server import create_ui_server
 @pytest.fixture
 def temp_dir() -> Generator[Path, None, None]:
     """Provide a temporary directory cleaned up after test completion."""
-    temp_path = Path(tempfile.mkdtemp(prefix="polyglot_test_"))
+    temp_path = normalize_path(tempfile.mkdtemp(prefix="polyglot_test_"))
     try:
         yield temp_path
     finally:

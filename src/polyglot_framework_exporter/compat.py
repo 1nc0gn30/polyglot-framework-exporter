@@ -68,9 +68,12 @@ def normalize_path(path: Union[str, Path]) -> Path:
     """
     p = Path(path).expanduser()
     try:
-        return p.resolve()
+        resolved = p.resolve()
+        if not resolved.is_absolute():
+            resolved = Path(os.path.abspath(str(p)))
+        return resolved
     except (OSError, RuntimeError):
-        return p.absolute()
+        return Path(os.path.abspath(str(p)))
 
 
 def sanitize_filename(name: str, max_length: int = 255, replacement: str = "_") -> str:
