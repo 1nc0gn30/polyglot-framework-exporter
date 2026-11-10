@@ -1581,24 +1581,7 @@ const { title } = Astro.props;
   </head>
   <body>
     <slot />
-    
-
-  <script src="/sovereign_tutorial.js"></script>
-  <script>
-    window.addEventListener("DOMContentLoaded", function() {
-      if (window.createSovereignTutorial) {
-        window.createSovereignTutorial({
-          toolId: "polyglot-framework-exporter",
-          toolName: "Polyglot Framework Exporter",
-          tagline: "Convert React and JSX components into clean HTML/CSS, Vue, Svelte, and Solid!",
-          accentColor: "#10B981",
-          steps: [{"icon": "\ud83d\udd04", "title": "Break Framework Lock-In", "desc": "Paste React or JSX code and convert it cleanly into Vue, Svelte, Solid, or pure vanilla HTML/CSS."}, {"icon": "\u26a1", "title": "Client-Side AST Parsing", "desc": "All code transforms happen 100% inside your browser using Babel and AST traversers."}, {"icon": "\ud83d\udccb", "title": "One-Click Copy & Export", "desc": "Instant side-by-side diff preview and one-click export for any modern web framework."}]
-        });
-      }
-    });
-  </script>
-
-</body>
+  </body>
 </html>
 `;
             break;
@@ -1610,23 +1593,7 @@ const { title } = Astro.props;
               dependencies: { next: "^15.0.0", react: "^19.0.0", "react-dom": "^19.0.0" }
             }, null, 2);
             files["next.config.mjs"] = `/** @type {import('next').NextConfig} */\nconst nextConfig = { reactStrictMode: true };\nexport default nextConfig;\n`;
-            files["app/layout.tsx"] = `export default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang="en">\n      <body className="bg-black text-white">{children}
-  <script src="/sovereign_tutorial.js"></script>
-  <script>
-    window.addEventListener("DOMContentLoaded", function() {
-      if (window.createSovereignTutorial) {
-        window.createSovereignTutorial({
-          toolId: "polyglot-framework-exporter",
-          toolName: "Polyglot Framework Exporter",
-          tagline: "Convert React and JSX components into clean HTML/CSS, Vue, Svelte, and Solid!",
-          accentColor: "#10B981",
-          steps: [{"icon": "\ud83d\udd04", "title": "Break Framework Lock-In", "desc": "Paste React or JSX code and convert it cleanly into Vue, Svelte, Solid, or pure vanilla HTML/CSS."}, {"icon": "\u26a1", "title": "Client-Side AST Parsing", "desc": "All code transforms happen 100% inside your browser using Babel and AST traversers."}, {"icon": "\ud83d\udccb", "title": "One-Click Copy & Export", "desc": "Instant side-by-side diff preview and one-click export for any modern web framework."}]
-        });
-      }
-    });
-  </script>
-
-</body>\n    </html>\n  );\n}\n`;
+            files["app/layout.tsx"] = `export default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang="en">\n      <body className="bg-black text-white">{children}</body>\n    </html>\n  );\n}\n`;
             files["app/page.tsx"] = `export default function Home() {\n  return (\n    <main className="p-8">\n      <h1 className="text-3xl font-bold text-yellow-400">${title}</h1>\n      <p className="mt-2 text-gray-400">${desc}</p>\n    </main>\n  );\n}\n`;
             break;
 
@@ -1638,23 +1605,7 @@ const { title } = Astro.props;
               devDependencies: { vite: "^6.0.0", "@vitejs/plugin-react": "^4.3.0", typescript: "^5.6.0" }
             }, null, 2);
             files["vite.config.ts"] = `import { defineConfig } from 'vite';\nimport react from '@vitejs/plugin-react';\nexport default defineConfig({ plugins: [react()] });\n`;
-            files["index.html"] = `<!DOCTYPE html>\n<html>\n<head><meta charset="UTF-8" /><title>${title}</title></head>\n<body><div id="root"></div>\\x3cscript type="module" src="/src/main.tsx">\\x3c/script>
-  <script src="/sovereign_tutorial.js"></script>
-  <script>
-    window.addEventListener("DOMContentLoaded", function() {
-      if (window.createSovereignTutorial) {
-        window.createSovereignTutorial({
-          toolId: "polyglot-framework-exporter",
-          toolName: "Polyglot Framework Exporter",
-          tagline: "Convert React and JSX components into clean HTML/CSS, Vue, Svelte, and Solid!",
-          accentColor: "#10B981",
-          steps: [{"icon": "\ud83d\udd04", "title": "Break Framework Lock-In", "desc": "Paste React or JSX code and convert it cleanly into Vue, Svelte, Solid, or pure vanilla HTML/CSS."}, {"icon": "\u26a1", "title": "Client-Side AST Parsing", "desc": "All code transforms happen 100% inside your browser using Babel and AST traversers."}, {"icon": "\ud83d\udccb", "title": "One-Click Copy & Export", "desc": "Instant side-by-side diff preview and one-click export for any modern web framework."}]
-        });
-      }
-    });
-  </script>
-
-</body>\n</html>\n`;
+            files["index.html"] = `<!DOCTYPE html>\n<html>\n<head><meta charset="UTF-8" /><title>${title}</title></head>\n<body><div id="root"></div>\\x3cscript type="module" src="/src/main.tsx">\\x3c/script></body>\n</html>\n`;
             files["src/main.tsx"] = `import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\nReactDOM.createRoot(document.getElementById('root')!).render(<App />);\n`;
             files["src/App.tsx"] = `export default function App() {\n  return (\n    <div className="min-h-screen p-8 bg-[#08080B] text-[#EDEFF2]">\n      <h1 className="text-4xl font-bold text-[#D4AF37]">${title}</h1>\n      <p className="mt-2 text-gray-400">${desc}</p>\n    </div>\n  );\n}\n`;
             break;
@@ -1695,23 +1646,7 @@ const { title } = Astro.props;
               devDependencies: { electron: "^33.0.0" }
             }, null, 2);
             files["electron/main.js"] = `const { app, BrowserWindow } = require('electron');\nconst path = require('path');\n\nfunction createWindow() {\n  const win = new BrowserWindow({ width: 1200, height: 800 });\n  win.loadFile('src/index.html');\n}\napp.whenReady().then(createWindow);\n`;
-            files["src/index.html"] = `<!DOCTYPE html><html><body style="background:#08080B;color:#EDEFF2;"><h1 style="color:#D4AF37;">${title} (Electron)</h1><p>${desc}</p>
-  <script src="/sovereign_tutorial.js"></script>
-  <script>
-    window.addEventListener("DOMContentLoaded", function() {
-      if (window.createSovereignTutorial) {
-        window.createSovereignTutorial({
-          toolId: "polyglot-framework-exporter",
-          toolName: "Polyglot Framework Exporter",
-          tagline: "Convert React and JSX components into clean HTML/CSS, Vue, Svelte, and Solid!",
-          accentColor: "#10B981",
-          steps: [{"icon": "\ud83d\udd04", "title": "Break Framework Lock-In", "desc": "Paste React or JSX code and convert it cleanly into Vue, Svelte, Solid, or pure vanilla HTML/CSS."}, {"icon": "\u26a1", "title": "Client-Side AST Parsing", "desc": "All code transforms happen 100% inside your browser using Babel and AST traversers."}, {"icon": "\ud83d\udccb", "title": "One-Click Copy & Export", "desc": "Instant side-by-side diff preview and one-click export for any modern web framework."}]
-        });
-      }
-    });
-  </script>
-
-</body></html>`;
+            files["src/index.html"] = `<!DOCTYPE html><html><body style="background:#08080B;color:#EDEFF2;"><h1 style="color:#D4AF37;">${title} (Electron)</h1><p>${desc}</p></body></html>`;
             break;
 
           default:
