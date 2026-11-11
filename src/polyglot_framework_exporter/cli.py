@@ -374,6 +374,14 @@ class FrameworkStudioHandler(http.server.SimpleHTTPRequestHandler):
         path = parsed.path
         query = urllib.parse.parse_qs(parsed.query)
 
+        # API: Health Check
+        if path in ("/health", "/api/health"):
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"status": "ok", "service": "polyglot-framework-exporter", "version": __version__}).encode("utf-8"))
+            return
+
         # API: Frameworks Catalog
         if path == "/api/frameworks":
             self.send_response(200)
@@ -881,7 +889,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
     # Subcommand: serve
     p_serve = subparsers.add_parser("serve", help="Launch the Polyglot Studio Web UI.")
     p_serve.add_argument("-H", "--host", default="127.0.0.1", help="Host address to bind (default: 127.0.0.1).")
-    p_serve.add_argument("-p", "--port", type=int, default=8080, help="Port to listen on (default: 8080).")
+    p_serve.add_argument("-p", "--port", type=int, default=8126, help="Port to listen on (default: 8126).")
     p_serve.add_argument("-b", "--open", action="store_true", help="Auto-open browser on startup.")
 
     # Subcommand: mcp

@@ -20,7 +20,7 @@ class NuxtGenerator:
 
     name = "nuxt"
     display_name = "Nuxt 3 (Vue 3)"
-    description = "Next-generation fullstack Vue 3 & Nuxt 3 application with Tailwind CSS."
+    description = "Fullstack Vue 3 & Nuxt 3 application with Tailwind CSS."
 
     def generate(
         self,

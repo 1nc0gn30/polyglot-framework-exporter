@@ -8,7 +8,7 @@
     "polyglot-export": "./bin/polyglot.js"
   },
   "scripts": {
-    "start": "python3 -m polyglot_framework_exporter.cli serve --port 8086",
+    "start": "python3 -m polyglot_framework_exporter.cli serve --port 8126",
     "electron": "electron .",
     "app": "electron .",
     "test": "pytest tests/"
@@ -29,7 +29,7 @@
     "electron",
     "zoth"
   ],
-  "author": "NullAI Tech / Zoth Team",
+  "author": "1nc0gn30 (@1nc0gn30) • NullAI",
   "license": "MIT",
   "devDependencies": {
     "electron": "^34.5.8"

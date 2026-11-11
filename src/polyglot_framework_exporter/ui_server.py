@@ -639,7 +639,7 @@ def main() -> int:
         description="Polyglot Studio Web UI Server for Polyglot Exporter"
     )
     parser.add_argument("--host", default="127.0.0.1", help="Host interface to bind (default: 127.0.0.1)")
-    parser.add_argument("--port", "-p", type=int, default=8080, help="Port to listen on (default: 8080)")
+    parser.add_argument("--port", "-p", type=int, default=8126, help="Port to listen on (default: 8126)")
     parser.add_argument("--open", "-o", action="store_true", help="Automatically open browser on launch")
     parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose debug logging")
 

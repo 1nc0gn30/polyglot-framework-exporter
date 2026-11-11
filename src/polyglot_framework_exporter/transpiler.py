@@ -405,7 +405,7 @@ class FeatureItem:
 @dataclass
 class FeaturesComponent:
     title: str = "Engineered for Velocity & Precision"
-    subtitle: str = "Everything you need to ship world-class software across modern web and desktop ecosystems."
+    subtitle: str = "Everything you need to ship production-ready software across modern web and desktop ecosystems."
     badge: str = "Capabilities"
     items: List[Dict[str, Any]] = field(default_factory=lambda: [
         {

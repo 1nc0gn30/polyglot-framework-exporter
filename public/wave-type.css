@@ -20,14 +20,6 @@
   text-wrap: pretty;
 }
 
-.paywall-lock-card p {
-  max-width: 42ch;
-  line-height: 1.5;
-  margin-left: auto;
-  margin-right: auto;
-  text-wrap: pretty;
-}
-
 .benefit-item p {
   max-width: 48ch;
   line-height: 1.5;
@@ -61,9 +53,6 @@
 .banner-price,
 .banner-price del,
 .banner-price strong,
-.paywall-price-tag,
-.paywall-price-tag .old-price,
-.paywall-price-tag .new-price,
 .pricing-value,
 .pricing-value del,
 .pricing-value strong,
@@ -96,7 +85,6 @@ h2 {
   line-height: 1.25;
 }
 
-.paywall-lock-card h3,
 h3 {
   letter-spacing: -0.015em;
   line-height: 1.3;
