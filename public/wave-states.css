@@ -12,8 +12,6 @@
 .form-input:focus-visible,
 .form-select:focus-visible,
 .form-textarea:focus-visible,
-#license-key-input:focus-visible,
-#modal-key-input:focus-visible,
 #transpile-input:focus-visible {
   outline: 2px solid var(--primary, #D4AF37) !important;
   outline-offset: 1px !important;
@@ -249,8 +247,6 @@
 /* Calibrated Placeholders */
 .form-input::placeholder,
 .form-textarea::placeholder,
-#modal-key-input::placeholder,
-#license-key-input::placeholder,
 #transpile-input::placeholder {
   color: var(--text-disabled, #5F6368);
   opacity: 0.8;
@@ -275,10 +271,6 @@
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important;
 }
 
-#license-key-input:invalid:not(:placeholder-shown),
-#modal-key-input:invalid:not(:placeholder-shown) {
-  border-color: #ef4444 !important;
-}
 
 .form-input[aria-invalid="true"],
 .form-textarea[aria-invalid="true"] {
