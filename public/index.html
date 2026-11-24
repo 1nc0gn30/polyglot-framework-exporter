@@ -1651,12 +1651,31 @@ const { title } = Astro.props;
         showToast(`▣ Downloaded ${projectName}-${selectedFramework}-bundle.zip!`);
       }
 
+      function copyToClipboardSafe(text, successMsg) {
+        const fallback = () => {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+          } catch (_) {}
+          showToast(successMsg);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => showToast(successMsg)).catch(fallback);
+        } else {
+          fallback();
+        }
+      }
+
       document.getElementById("btn-download-zip").addEventListener("click", triggerZipDownload);
       document.getElementById("btn-copy-file").addEventListener("click", () => {
         if (activeFilePath && currentGeneratedFiles[activeFilePath]) {
-          navigator.clipboard.writeText(currentGeneratedFiles[activeFilePath]).then(() => {
-            showToast(`Copied ${activeFilePath} to clipboard!`);
-          });
+          copyToClipboardSafe(currentGeneratedFiles[activeFilePath], `Copied ${activeFilePath} to clipboard!`);
         }
       });
 
@@ -1749,7 +1768,7 @@ export function FeatureCard({ icon, title, description }: { icon: string; title:
       document.getElementById("btn-run-transpile").addEventListener("click", runTranspiler);
       document.getElementById("btn-copy-transpile").addEventListener("click", () => {
         const text = document.getElementById("transpile-output").textContent;
-        navigator.clipboard.writeText(text).then(() => showToast("Transpiled output copied!"));
+        copyToClipboardSafe(text, "Transpiled output copied!");
       });
 
       // Inputs change listeners
