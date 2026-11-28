@@ -109,6 +109,33 @@ except ImportError:
 logger = logging.getLogger("polyglot_framework_exporter.ui_server")
 SERVER_START_TIME = time.time()
 
+_TRUSTED_HOSTS = ("127.0.0.1", "localhost", "::1")
+_MAX_BODY_BYTES = 1_048_576  # 1 MiB cap on JSON request bodies.
+
+
+class _BadRequest(Exception):
+    """Malformed request (bad Content-Length or JSON body) → HTTP 400."""
+
+
+class _BodyTooLarge(Exception):
+    """Oversized request body → HTTP 413."""
+
+
+def _is_trusted_host(value) -> bool:
+    """True only for loopback Host headers (DNS-rebinding guard)."""
+    if not value:
+        return False
+    host = str(value).split("@")[-1].split(",")[0].strip()
+    if host.startswith("["):
+        hostname = host[1:].split("]")[0]
+    else:
+        try:
+            import ipaddress as _ip
+            return _ip.ip_address(host).is_loopback
+        except ValueError:
+            hostname = host.split(":")[0].strip().lower()
+    return hostname in _TRUSTED_HOSTS
+
 
 # ==============================================================================
 # Fallback Embedded Studio HTML (used if public/index.html is not found)
@@ -244,11 +271,69 @@ def get_supported_frameworks_list() -> List[Dict[str, Any]]:
 class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
     """Custom HTTP handler serving Polyglot Studio UI and REST APIs."""
 
-    server_version = "PolyglotStudioServer/0.1.0"
+    server_version = "Polyglot"
+    sys_version = ""
 
     def log_message(self, format: str, *args: Any) -> None:
         """Custom logger writing to Python logging rather than raw stderr."""
         logger.debug(f"{self.address_string()} - - [{self.log_date_time_string()}] {format % args}")
+
+    def _deny_non_loopback_host(self) -> bool:
+        """Reject DNS-rebinding style Host headers with 403. True when denied."""
+        if not _is_trusted_host(self.headers.get("Host", "")):
+            self.send_json_response({"error": "Forbidden: non-loopback Host header"}, status=403)
+            return True
+        return False
+
+    def _send_security_headers(self) -> None:
+        """Loopback-hardened security headers on every response.
+
+        No X-Frame-Options on purpose: it cannot express an allowlist and
+        SAMEORIGIN would break the first-party Studio embed on :3000. The
+        CSP frame-ancestors allowlist below is the enforced policy.
+        NOTE: script/style 'unsafe-inline' covers this page's own first-party
+        catalog data + init scripts + presentational attributes (audited: no
+        eval, no remote code, no external fetches — all fetches same-origin).
+        Google Fonts are allowlisted for the Space Grotesk/JetBrains Mono/Inter
+        webfonts.
+        """
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
+        self.send_header(
+            "Content-Security-Policy",
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline'; "
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+            "img-src 'self' data: blob:; "
+            "font-src 'self' data: https://fonts.gstatic.com; "
+            "connect-src 'self' http://127.0.0.1:* http://localhost:*; "
+            "frame-ancestors 'self' http://127.0.0.1:3000 http://localhost:3000 http://127.0.0.1:* http://localhost:*; "
+            "base-uri 'self'; "
+            "object-src 'none'",
+        )
+
+    def end_headers(self) -> None:
+        self._send_security_headers()
+        super().end_headers()
+
+    def _read_json_body(self) -> Dict[str, Any]:
+        """Read and parse JSON request body (1 MiB cap; errors raise)."""
+        raw_len = (self.headers.get("Content-Length", "0") or "0").split(",")[0].strip()
+        try:
+            content_len = int(raw_len) if raw_len else 0
+        except ValueError:
+            raise _BadRequest("Invalid Content-Length")
+        if content_len < 0:
+            raise _BadRequest("Invalid Content-Length")
+        if content_len > _MAX_BODY_BYTES:
+            raise _BodyTooLarge("Payload Too Large")
+        if content_len == 0:
+            return {}
+        try:
+            data = json.loads(self.rfile.read(content_len).decode("utf-8", errors="replace"))
+        except json.JSONDecodeError as e:
+            raise _BadRequest(f"Invalid JSON payload: {e}")
+        return data if isinstance(data, dict) else {}
 
     def send_cors_headers(self) -> None:
         """Add standard CORS headers for local and cross-origin access."""
@@ -280,12 +365,16 @@ class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self) -> None:
         """Handle CORS preflight requests."""
+        if self._deny_non_loopback_host():
+            return
         self.send_response(204)
         self.send_cors_headers()
         self.end_headers()
 
     def do_GET(self) -> None:
         """Route GET requests to API handlers or static file server."""
+        if self._deny_non_loopback_host():
+            return
         parsed_url = urllib.parse.urlparse(self.path)
         path = parsed_url.path.rstrip("/") or "/"
         query = urllib.parse.parse_qs(parsed_url.query)
@@ -308,7 +397,8 @@ class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         """Route POST requests to API handlers."""
-
+        if self._deny_non_loopback_host():
+            return
         if not _is_local_origin(self.headers.get("Origin")):
 
             self.send_error(403, "Cross-origin request blocked")
@@ -317,13 +407,13 @@ class StudioHTTPRequestHandler(BaseHTTPRequestHandler):
         parsed_url = urllib.parse.urlparse(self.path)
         path = parsed_url.path.rstrip("/") or "/"
 
-        content_len = int(self.headers.get("Content-Length", 0))
-        post_body = self.rfile.read(content_len) if content_len > 0 else b"{}"
-
         try:
-            body_json = json.loads(post_body.decode("utf-8")) if post_body else {}
-        except json.JSONDecodeError as err:
-            self.send_error_json(f"Invalid JSON payload: {err}", status=400)
+            body_json = self._read_json_body()
+        except _BodyTooLarge as e:
+            self.send_error_json(str(e), status=413)
+            return
+        except _BadRequest as e:
+            self.send_error_json(str(e), status=400)
             return
 
         if path == "/api/export":
